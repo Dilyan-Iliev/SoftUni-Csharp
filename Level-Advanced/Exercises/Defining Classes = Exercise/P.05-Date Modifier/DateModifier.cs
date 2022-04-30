@@ -28,6 +28,7 @@ namespace P._05_Date_Modifier
         public int CalculateDifferenceBetweenDays(string firstDate, string secondDate)
         {
             return Math.Abs((this.FirstDate.Date - this.SecondDate.Date).Days);
+            //.Days определя в какво да се смята разликата м/у две дати ; може .Minutes/Seconds и др.
         }
     }
 }
