@@ -6,3 +6,4 @@ Here are my solutions to all my homeworks during my education at SoftUni
 
 2.1 [**Level Advanced - Labs**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Advanced/Labs) ;
 2.2.[**Level Advanced - Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Advanced/Exercises) ;
+2.3.[**Level Advanced - Exams**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Advanced/Exams)
