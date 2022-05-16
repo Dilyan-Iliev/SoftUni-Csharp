@@ -8,53 +8,41 @@ namespace P._03_Maximum_and_Minimum_Element
     {
         static void Main(string[] args)
         {
+            int n = int.Parse(Console.ReadLine());
+
             Stack<int> stack = new Stack<int>();
 
-            int iterations = int.Parse(Console.ReadLine());
-
-            for (int i = 1; i <= iterations; i++)
+            for (int i = 0; i < n; i++)
             {
-                int[] arr = Console.ReadLine()
-                    .Split()
+                int[] input = Console.ReadLine()
+                    .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToArray();
 
-                int cmd = arr[0];
+                var command = input[0];
 
-                if (cmd == 1)
+                if (command == 1)
                 {
-                    int numberToPush = arr[1];
-                    stack.Push(numberToPush);
+                    int elementToPush = input[1];
+                    stack.Push(elementToPush);
                 }
-                else if (cmd == 2)
+                else if (stack.Any())
                 {
-                    if (stack.Count > 0)
+                    if (command == 2)
                     {
                         stack.Pop();
                     }
-                }
-                else if (cmd == 3)
-                {
-                    if (stack.Count == 0)
+                    else if (command == 3)
                     {
-                        continue;
+                        Console.WriteLine(stack.Max());
                     }
-                    Console.WriteLine(stack.Max());
-                }
-                else if (cmd == 4)
-                {
-                    if (stack.Count == 0)
+                    else if (command == 4)
                     {
-                        continue;
+                        Console.WriteLine(stack.Min());
                     }
-                    Console.WriteLine(stack.Min());
                 }
             }
-
-            if (stack.Count > 0)
-            {
-                Console.WriteLine(string.Join(", ", stack));
-            }
+            Console.WriteLine(string.Join(", ", stack));
         }
     }
 }
