@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P.03-StreetRacing", "P.03-SkiRental\P.03-StreetRacing.csproj", "{402B41DD-D9F6-4CD5-880D-CF1B338EA8DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P.01-BirthdayCelebration", "P.01-BirthdayCelebration\P.01-BirthdayCelebration.csproj", "{FDFA969F-723D-42FF-8C94-EEE6C95F1650}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{402B41DD-D9F6-4CD5-880D-CF1B338EA8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402B41DD-D9F6-4CD5-880D-CF1B338EA8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402B41DD-D9F6-4CD5-880D-CF1B338EA8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402B41DD-D9F6-4CD5-880D-CF1B338EA8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDFA969F-723D-42FF-8C94-EEE6C95F1650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFA969F-723D-42FF-8C94-EEE6C95F1650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDFA969F-723D-42FF-8C94-EEE6C95F1650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFA969F-723D-42FF-8C94-EEE6C95F1650}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2B0F385-6FA9-48C7-97CA-376B89A84175}
+	EndGlobalSection
+EndGlobal
