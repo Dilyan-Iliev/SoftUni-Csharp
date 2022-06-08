@@ -23,10 +23,10 @@ namespace P._05_Football_Team_Generator
 
         public string Name
         {
-            get { return name; }
+            get => name; 
             private set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(value)) //includes null, white space and string.Empty
                 {
                     throw new ArgumentException("A name should not be empty.");
                 }
@@ -85,18 +85,11 @@ namespace P._05_Football_Team_Generator
             }
         }
 
-        public int GetOverallSkill
-        {
-            get => OverallSkill();
-        }
+        public double Stats => (Endurance + Sprint + Dribble + Passing + Shooting) /  5.0;
 
-        private int OverallSkill()
-        {
-            return (int)Math.Round((Endurance + Sprint + Dribble + Passing + Shooting) / 5.0);
-        }
         private void ValidateData(int value, string statsName)
         {
-            if (value <= 0 || value >= 100)
+            if (value < 0 || value > 100)
             {
                 throw new ArgumentException($"{statsName} should be between 0 and 100.");
             }

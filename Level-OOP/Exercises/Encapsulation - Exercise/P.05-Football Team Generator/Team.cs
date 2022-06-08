@@ -7,7 +7,7 @@ namespace P._05_Football_Team_Generator
     public class Team
     {
         private string name;
-        private readonly List<Player> players;
+        private List<Player> players;
 
         public Team(string name)
         {
@@ -29,47 +29,21 @@ namespace P._05_Football_Team_Generator
             }
         }
 
-        public int GetTeamRating
-        {
-            get => TeamRating();
-        }
+        public int Rating => this.players.Count == 0 ? 0 : (int)Math.Round(this.players.Average(x => x.Stats)); 
 
-        public void Add(Player player)
+        public void AddPlayer(Player player)
         {
             this.players.Add(player);
         }
-        public void Remove(string name)
+        public void RemovePlayer(string playerName)
         {
-            var player = players
-                .Where(x => x.Name == name)
-                .FirstOrDefault();
+            Player player = this.players.FirstOrDefault(x => x.Name == playerName);
 
-            if (player is null)
+            if (player == null)
             {
-                throw new ArgumentException($"Player {name} is not in the {this.Name} team.");
+                throw new InvalidOperationException($"Player {playerName} is not in {this.Name} team.");
             }
-
-            players.Remove(player);
-        }
-        private int TeamRating()
-        {
-            var result = 0;
-
-            foreach (var player in players)
-            {
-                result += player.GetOverallSkill;
-            }
-
-            if (result == 0)
-            {
-                return 0; 
-            }
-
-            return result / players.Count;
-        }
-        public override string ToString()
-        {
-            return $"{this.Name} - {this.GetTeamRating}";
+            this.players.Remove(player);
         }
     }
 }

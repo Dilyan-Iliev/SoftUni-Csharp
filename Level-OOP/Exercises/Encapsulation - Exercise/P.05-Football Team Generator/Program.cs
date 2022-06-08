@@ -8,68 +8,70 @@ namespace P._05_Football_Team_Generator
     {
         static void Main(string[] args)
         {
-            List<Team> teams = new List<Team>();
+            Dictionary<string, Team> teams = new Dictionary<string, Team>();
 
-            string input;
-            while ((input = Console.ReadLine()) != "END")
+            string command;
+
+            while ((command = Console.ReadLine()) != "END")
             {
-                string[] tokens = input
-                    .Split(';', StringSplitOptions.RemoveEmptyEntries);
+                string[] cmdArgs = command
+                    .Split(';');
 
-                string command = tokens[0];
-                string teamName = tokens[1];
-                string playerName = default;
+                string action = cmdArgs[0];
 
-                switch (command)
+                try
                 {
-                    case "Add" when teams.Any(x => x.Name == teamName): //да се изпълни когато (when) е изпълнено даденото условие
-                        playerName = tokens[2];
-                        int endurance = int.Parse(tokens[3]);
-                        int sprint = int.Parse(tokens[4]);
-                        int dribble = int.Parse(tokens[5]);
-                        int passing = int.Parse(tokens[6]);
-                        int shooting = int.Parse(tokens[7]);
+                    if (action == "Team")
+                    {
+                        string name = cmdArgs[1];
 
-                        try
+                        Team team = new Team(name);
+                        teams.Add(name, team);
+                    }
+                    else if (action == "Add")
+                    {
+                        string teamName = cmdArgs[1];
+
+                        if (!teams.ContainsKey(teamName))
                         {
-                            Player player = new Player(playerName, endurance, sprint, dribble, passing, shooting);
-                            teams.First(x => x.Name == teamName).Add(player);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
+                            Console.WriteLine($"Team {teamName} does not exist.");
                             continue;
                         }
 
-                        break;
+                        string playerName = cmdArgs[2];
+                        int endurance = int.Parse(cmdArgs[3]);
+                        int sprint = int.Parse(cmdArgs[4]);
+                        int dribble = int.Parse(cmdArgs[5]);
+                        int passing = int.Parse(cmdArgs[6]);
+                        int shooting = int.Parse(cmdArgs[7]);
 
-                    case "Remove" when teams.Any(x => x.Name == teamName):
-                        try
+                        Player player = new Player(playerName, endurance, sprint, dribble, passing, shooting);
+
+                        teams[teamName].AddPlayer(player);
+                    }
+                    else if (action == "Remove")
+                    {
+                        string teamName = cmdArgs[1];
+                        string playerToRemove = cmdArgs[2];
+
+                        teams[teamName].RemovePlayer(playerToRemove);
+                    }
+                    else if (action == "Rating")
+                    {
+                        string teamName = cmdArgs[1];
+
+                        if (!teams.ContainsKey(teamName))
                         {
-                            playerName = tokens[2];
-                            teams.First(x => x.Name == teamName)
-                                .Remove(playerName);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
+                            Console.WriteLine($"Team {teamName} does not exist.");
                             continue;
                         }
 
-                        break;
-
-                    case "Rating" when teams.Any(x => x.Name == teamName):
-                        Team team = teams.First(x => x.Name == teamName);
-                        Console.WriteLine(team.ToString());
-                        break;
-
-                    case "Team":
-                        teams.Add(new Team(teamName));
-                        break;
-
-                    default:
-                        Console.WriteLine($"Team {teamName} does not exist.");
-                        break;
+                        Console.WriteLine($"{teamName} - {teams[teamName].Rating}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
