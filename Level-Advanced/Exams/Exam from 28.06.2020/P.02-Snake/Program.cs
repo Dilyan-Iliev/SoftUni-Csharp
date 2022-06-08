@@ -2,18 +2,22 @@
 
 namespace P._02_Snake
 {
-    internal class Program
+    public class Program
     {
-        public static int snakeStartRow = 0;
-        public static int snakeStartCol = 0;
-        static void Main(string[] args)
-        {
-            int matrixSize = int.Parse(Console.ReadLine());
-            char[,] matrix = new char[matrixSize, matrixSize];
+        private static int startRow = 0;
+        private static int startCol = 0;
+        private static readonly char defaultEmptyPosition = '.';
+        private static readonly char snakeNewPosition = 'S';
+        private static readonly int neededFood = 10;
+        private static int foodEeaten = 0;
 
+        static void Main()
+        {
+            int size = int.Parse(Console.ReadLine());
+
+            char[,] matrix = new char[size, size];
             MatrixFill(matrix);
 
-            int foodEaten = 0;
 
             while (true)
             {
@@ -21,77 +25,59 @@ namespace P._02_Snake
 
                 if (direction == "up")
                 {
-                    matrix[snakeStartRow, snakeStartCol] = '.';
-                    snakeStartRow--;
+                    matrix[startRow, startCol] = defaultEmptyPosition;
+                    startRow--;
 
-                    if (snakeStartRow >= 0)
+                    if (startRow < 0)
                     {
-                        SnakeMoves(matrix, ref foodEaten);
-                        matrix[snakeStartRow, snakeStartCol] = 'S';
-                    }
-                    else
-                    {
-                        Console.WriteLine("Game over!");
-                        Console.WriteLine($"Food eaten: {foodEaten}");
+                        EndGameMessage();
                         break;
                     }
+
+                    NavigateInMatrix(matrix);
                 }
                 else if (direction == "down")
                 {
-                    matrix[snakeStartRow, snakeStartCol] = '.';
-                    snakeStartRow++;
+                    matrix[startRow, startCol] = defaultEmptyPosition;
+                    startRow++;
 
-                    if (snakeStartRow < matrixSize)
+                    if (startRow >= size)
                     {
-                        SnakeMoves(matrix, ref foodEaten);
-                        matrix[snakeStartRow, snakeStartCol] = 'S';
-                    }
-                    else
-                    {
-                        Console.WriteLine("Game over!");
-                        Console.WriteLine($"Food eaten: {foodEaten}");
+                        EndGameMessage();
                         break;
                     }
+
+                    NavigateInMatrix(matrix);
                 }
                 else if (direction == "left")
                 {
-                    matrix[snakeStartRow, snakeStartCol] = '.';
-                    snakeStartCol--;
+                    matrix[startRow, startCol] = defaultEmptyPosition;
+                    startCol--;
 
-                    if (snakeStartCol >= 0)
+                    if (startCol < 0)
                     {
-                        SnakeMoves(matrix, ref foodEaten);
-                        matrix[snakeStartRow, snakeStartCol] = 'S';
-                    }
-                    else
-                    {
-                        Console.WriteLine("Game over!");
-                        Console.WriteLine($"Food eaten: {foodEaten}");
+                        EndGameMessage();
                         break;
                     }
+
+                    NavigateInMatrix(matrix);
                 }
                 else if (direction == "right")
                 {
-                    matrix[snakeStartRow, snakeStartCol] = '.';
-                    snakeStartCol++;
+                    matrix[startRow, startCol] = defaultEmptyPosition;
+                    startCol++;
 
-                    if (snakeStartCol < matrixSize)
+                    if (startCol >= size)
                     {
-                        SnakeMoves(matrix, ref foodEaten);
-                        matrix[snakeStartRow, snakeStartCol] = 'S';
-                    }
-                    else
-                    {
-                        Console.WriteLine("Game over!");
-                        Console.WriteLine($"Food eaten: {foodEaten}");
+                        EndGameMessage();
                         break;
                     }
+
+                    NavigateInMatrix(matrix);
                 }
 
-                if (foodEaten == 10)
+                if (CollectedNeededFood())
                 {
-                    Console.WriteLine("You won! You fed the snake.");
-                    Console.WriteLine($"Food eaten: {foodEaten}");
                     break;
                 }
             }
@@ -99,33 +85,15 @@ namespace P._02_Snake
             PrintOutput(matrix);
         }
 
-        static void SnakeMoves(char[,] matrix, ref int foodEaten)
-        {
-            if (matrix[snakeStartRow, snakeStartCol] == '*')
-            {
-                matrix[snakeStartRow, snakeStartCol] = '.';
-                foodEaten++;
-            }
-            else if (matrix[snakeStartRow, snakeStartCol] == 'B')
-            {
-                matrix[snakeStartRow, snakeStartCol] = '.';
-
-                for (int row = 0; row < matrix.GetLength(0); row++)
-                {
-                    for (int col = 0; col < matrix.GetLength(1); col++)
-                    {
-                        if (matrix[row, col] == 'B')
-                        {
-                            snakeStartRow = row;
-                            snakeStartCol = col;
-                        }
-                    }
-                }
-            }
-        }
-
         static void PrintOutput(char[,] matrix)
         {
+            if (foodEeaten >= neededFood)
+            {
+                Console.WriteLine("You won! You fed the snake.");
+            }
+
+            Console.WriteLine($"Food eaten: {foodEeaten}");
+
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
                 for (int col = 0; col < matrix.GetLength(1); col++)
@@ -136,20 +104,65 @@ namespace P._02_Snake
             }
         }
 
+        static bool CollectedNeededFood() => foodEeaten >= neededFood;
+        //{
+        //    if (foodEeaten >= neededFood)
+        //    {
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
+
+        static void NavigateInMatrix(char[,] matrix)
+        {
+            if (matrix[startRow, startCol] == '*')
+            {
+                foodEeaten++;
+            }
+            else if (matrix[startRow, startCol] == 'B')
+            {
+                matrix[startRow, startCol] = defaultEmptyPosition;
+                SearchForSecondBurrow(matrix);
+            }
+
+            matrix[startRow, startCol] = snakeNewPosition;
+        }
+
+        static void SearchForSecondBurrow(char[,] matrix)
+        {
+            for (int row = 0; row < matrix.GetLength(0); row++)
+            {
+                for (int col = 0; col < matrix.GetLength(1); col++)
+                {
+                    if (matrix[row, col] == 'B')
+                    {
+                        startRow = row;
+                        startCol = col;
+                    }
+                }
+            }
+        }
+
+        static void EndGameMessage()
+        {
+            Console.WriteLine("Game over!");
+        }
+
         static void MatrixFill(char[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
-                string matrixContent = Console.ReadLine();
+                string matrixData = Console.ReadLine();
 
                 for (int col = 0; col < matrix.GetLength(1); col++)
                 {
-                    matrix[row, col] = matrixContent[col];
+                    matrix[row, col] = matrixData[col];
 
                     if (matrix[row, col] == 'S')
                     {
-                        snakeStartRow = row;
-                        snakeStartCol = col;
+                        startRow = row;
+                        startCol = col;
                     }
                 }
             }
