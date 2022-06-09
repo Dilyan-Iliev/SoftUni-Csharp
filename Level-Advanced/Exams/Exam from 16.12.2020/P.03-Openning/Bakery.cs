@@ -7,53 +7,60 @@ namespace BakeryOpenning
 {
     public class Bakery
     {
-        public List<Employee> Employees { get; set; }
-        public string Name { get; set; }    
-        public int Capacity { get; set; }
+        private List<Employee> employees;
 
         public Bakery(string name, int capacity)
         {
-            this.Name = name;
-            this.Capacity = capacity;
-            this.Employees = new List<Employee>();
+            Name = name;
+            Capacity = capacity;
+            employees = new List<Employee>();
         }
-        public int Count => this.Employees.Count;
+
+        public string Name { get; private set; }
+        public int Capacity { get; private set; }
+        public IReadOnlyCollection<Employee> Employees => employees.AsReadOnly();
+        public int Count => employees.Count;
+
         public void Add(Employee employee)
         {
-            if (Employees.Count < this.Capacity)
+            if (Capacity > employees.Count)
             {
-                Employees.Add(employee);
+                employees.Add(employee);
             }
         }
+
         public bool Remove(string name)
         {
-            Employee employee = Employees.Where(x => x.Name == name).FirstOrDefault();
+            Employee employee = employees
+                .Where(x => x.Name == name)
+                .FirstOrDefault();
 
             if (employee != null)
             {
-                Employees.Remove(employee);
+                employees.Remove(employee);
                 return true;
             }
 
             return false;
         }
-        public Employee GetOldestEmployee()
-        {
-            return Employees.OrderByDescending(x => x.Age).First();
-        }
-        public Employee GetEmployee(string name)
-        {
-            return Employees.Where(x => x.Name == name).FirstOrDefault();
-        }
+
+        public Employee GetOldestEmployee() => employees
+            .OrderByDescending(x => x.Age)
+            .FirstOrDefault();
+
+        public Employee GetEmployee(string name) => employees
+            .Where(x => x.Name == name)
+            .FirstOrDefault();
+
         public string Report()
         {
             var sb = new StringBuilder();
 
             sb.AppendLine($"Employees working at Bakery {Name}:");
 
-            foreach (var item in Employees)
+            foreach (var employee in employees)
             {
-                sb.AppendLine(item.ToString());
+                sb.AppendLine(employee.ToString());
             }
 
             return sb.ToString().TrimEnd();
