@@ -7,51 +7,55 @@ namespace VetClinic
 {
     public class Clinic
     {
-        public List<Pet> Pets { get; set; }
-        public int Capacity { get; set; }
+        private readonly List<Pet> pets;
 
         public Clinic(int capacity)
         {
-            this.Capacity = capacity;
-            this.Pets = new List<Pet>();
+            Capacity = capacity;
+            pets = new List<Pet>();
         }
-        public int Count => this.Pets.Count;
+        public int Capacity { get; private set; }
+        public IReadOnlyList<Pet> Pets => pets.AsReadOnly();
+        public int Count => this.pets.Count;
+
         public void Add(Pet pet)
         {
-            if (Pets.Count < this.Capacity)
+            if (this.Capacity > pets.Count)
             {
-                Pets.Add(pet);
+                pets.Add(pet);
             }
         }
+
         public bool Remove(string name)
         {
-            Pet pet = Pets.Where(x => x.Name == name).FirstOrDefault();
+            Pet pet = pets.Where(x => x.Name == name).FirstOrDefault();
 
             if (pet != null)
             {
-                Pets.Remove(pet);
+                this.pets.Remove(pet);
                 return true;
             }
 
             return false;
         }
-        public Pet GetPet(string name, string owner)
-        {
-            return Pets.FirstOrDefault(x => x.Name == name && x.Owner == owner);
-        }
-        public Pet GetOldestPet()
-        {
-            return Pets.OrderByDescending(x => x.Age).First();
-        }
+
+        public Pet GetPet(string name, string owner) => pets
+            .Where(x => x.Name == name && x.Owner == owner)
+            .FirstOrDefault();
+
+        public Pet GetOldestPet() => pets
+            .OrderByDescending(x => x.Age)
+            .First();
+
         public string GetStatistics()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.AppendLine("The clinic has the following patients:");
-            foreach (var pet in Pets)
+
+            foreach (var pet in pets)
             {
-                var toAppend = $"Pet {pet.Name} with owner: {pet.Owner}";
-                sb.AppendLine(toAppend);
+                sb.AppendLine($"Pet {pet.Name} with owner: {pet.Owner}");
             }
 
             return sb.ToString().TrimEnd();
