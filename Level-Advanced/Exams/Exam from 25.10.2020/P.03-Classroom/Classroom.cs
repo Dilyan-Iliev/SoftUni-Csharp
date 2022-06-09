@@ -7,66 +7,69 @@ namespace ClassroomProject
 {
     public class Classroom
     {
-        public List<Student> Students { get; set; }
-        public int Capacity { get; set; }
+        private List<Student> students;
 
         public Classroom(int capacity)
         {
-            this.Capacity = capacity;
-            this.Students = new List<Student>();
+            Capacity = capacity;
+            students = new List<Student>();
         }
-        public int Count => this.Students.Count;
+        public int Capacity { get; private set; }
+        public IReadOnlyList<Student> Students => students;
+        public int Count => students.Count;
+
         public string RegisterStudent(Student student)
         {
-            if (Students.Count >= this.Capacity)
+            if (Capacity > students.Count)
             {
-                return "No seats in the classroom";
+                students.Add(student);
+
+                return $"Added student {student.FirstName} {student.LastName}";
             }
 
-            Students.Add(student);
-            return $"Added student {student.FirstName} {student.LastName}";
+            return "No seats in the classroom";
         }
+
         public string DismissStudent(string firstName, string lastName)
         {
-            Student student = Students.Where(x => x.FirstName == firstName && x.LastName == lastName).FirstOrDefault();
+            Student student = students.Where(x => x.FirstName == firstName && x.LastName == lastName)
+                .FirstOrDefault();
 
             if (student != null)
             {
-                Students.Remove(student);
-                return $"Dismissed student {firstName} {lastName}";
+                students.Remove(student);
+
+                return $"Dismissed student {student.FirstName} {student.LastName}";
             }
 
             return "Student not found";
         }
+
         public string GetSubjectInfo(string subject)
         {
-            var filteredStudents = Students.Where(x => x.Subject == subject).ToList();
+            var filteredStudents = students.Where(x => x.Subject == subject).ToList();
 
             if (filteredStudents.Any())
             {
                 var sb = new StringBuilder();
+
                 sb.AppendLine($"Subject: {subject}");
                 sb.AppendLine("Students:");
-
                 foreach (var student in filteredStudents)
                 {
-                    string toAppend = $"{student.FirstName} {student.LastName}";
-                    sb.AppendLine(toAppend);
+                    sb.AppendLine($"{student.FirstName} {student.LastName}");
                 }
 
                 return sb.ToString().TrimEnd();
             }
+
             return "No students enrolled for the subject";
         }
-        public int GetStudentsCount()
-        {
-            return this.Count;
-        }
-        public Student GetStudent(string firstName, string lastName)
-        {
-            Student student = Students.Where(x => x.FirstName == firstName && x.LastName == lastName).FirstOrDefault();
 
-            return student;
-        }
+        public int GetStudentsCount() => this.Count;
+
+        public Student GetStudent(string firstName, string lastName) => students
+            .Where(x => x.FirstName == firstName && x.LastName == lastName)
+            .FirstOrDefault();
     }
 }
