@@ -7,94 +7,61 @@ namespace CocktailParty
 {
     public class Cocktail
     {
-        public Dictionary<string, Ingredient> Ingredients { get; set; }
-        public string Name { get; set; }
-        public int Capacity { get; set; } //the maximum allowed number of ingredients in the cocktail
-        public int MaxAlcoholLevel { get; set; } //the maximum allowed amount of alcohol in the cocktail
+        private readonly Dictionary<string, Ingredient> ingredients;
 
-        public Cocktail(string name, int capacity, int maxAlcoholLevel)
+        public Cocktail(string name, int capacity, int maxAlcohol)
         {
-            this.Name = name;
-            this.Capacity = capacity;
-            this.MaxAlcoholLevel = maxAlcoholLevel;
-
-            this.Ingredients = new Dictionary<string, Ingredient>();
+            Name = name;
+            Capacity = capacity;
+            MaxAlcoholLevel = maxAlcohol;
+            ingredients = new Dictionary<string, Ingredient>();
         }
+
+        public string Name { get; private set; }
+        public int Capacity { get; private set; } //max allowed ingredients in cocktail
+        public int MaxAlcoholLevel { get; private set; }
+        public IReadOnlyDictionary<string, Ingredient> Ingredients => ingredients;
+        public int CurrentAlcoholLevel => ingredients.Sum(x => x.Value.Alcohol);
 
         public void Add(Ingredient ingredient)
         {
-            if (!Ingredients.ContainsKey(ingredient.Name)
-                && Ingredients.Count < Capacity)
+            if (!ingredients.ContainsKey(ingredient.Name)
+                && Capacity > ingredients.Count)
             {
-                Ingredients[ingredient.Name] = ingredient;
+                ingredients[ingredient.Name] = ingredient;
             }
         }
 
         public bool Remove(string name)
         {
-            Ingredient ingredient = Ingredients[name];
+            Ingredient ingredient = ingredients[name];
 
             if (ingredient.Name == name)
             {
-                Ingredients.Remove(name);
-
+                ingredients.Remove(name);
                 return true;
             }
 
             return false;
         }
 
-        public Ingredient FindIngredient(string name)
-        {
-            Ingredient ingredient = Ingredients.Where(x => x.Value.Name == name)
-                .FirstOrDefault().Value;
+        public Ingredient FindIngredient(string name) => ingredients
+            .Where(x => x.Value.Name == name)
+            .FirstOrDefault().Value;
 
-            if (ingredient != null)
-            {
-                return ingredient;
-            }
+        public Ingredient GetMostAlcoholicIngredient() => ingredients
+            .OrderByDescending(x => x.Value.Alcohol)
+            .First().Value;
 
-            return null;
-        }
-
-        public Ingredient GetMostAlcoholicIngredient()
-        {
-            Ingredient ingredient = null;
-            int maxAlcohol = int.MinValue;
-
-            foreach (var item in Ingredients.Values)
-            {
-                if (item.Alcohol > maxAlcohol)
-                {
-                    maxAlcohol = item.Alcohol;
-                    ingredient = item;
-                }
-            }
-
-            return ingredient;
-        }
-        public int CurrentAlcoholLevel // or => Ingredients.Sum(x => x.Value.Alcohol);
-        {
-            get
-            {
-                int alcohol = 0;
-                foreach (var item in Ingredients.Values)
-                {
-                    alcohol += item.Alcohol;
-                }
-
-                return alcohol;
-            }
-        }
         public string Report()
         {
             var sb = new StringBuilder();
 
             sb.AppendLine($"Cocktail: {Name} - Current Alcohol Level: {CurrentAlcoholLevel}");
 
-            foreach (var item in Ingredients.Values)
+            foreach (var item in ingredients)
             {
-                sb.AppendLine(item.ToString());
+                sb.AppendLine(item.Value.ToString());
             }
 
             return sb.ToString().TrimEnd();

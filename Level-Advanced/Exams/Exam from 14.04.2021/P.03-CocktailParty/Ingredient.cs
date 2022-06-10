@@ -6,16 +6,16 @@ namespace CocktailParty
 {
     public class Ingredient
     {
-        public string Name { get; set; }
-        public int Alcohol { get; set; }
-        public int Quantity { get; set; }
-
         public Ingredient(string name, int alcohol, int quantity)
         {
-            this.Name = name;
-            this.Alcohol = alcohol;
-            this.Quantity = quantity;
+            Name = name;
+            Alcohol = alcohol;
+            Quantity = quantity;
         }
+
+        public string Name { get; private set; }
+        public int Alcohol { get; private set; }
+        public int Quantity { get; private set; }
 
         public override string ToString()
         {
