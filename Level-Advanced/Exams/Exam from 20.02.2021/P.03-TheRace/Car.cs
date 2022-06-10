@@ -6,13 +6,13 @@ namespace TheRace
 {
     public class Car
     {
-        public string Name { get; set; }
-        public int Speed { get; set; }
-
         public Car(string name, int speed)
         {
-            this.Name = name;
-            this.Speed = speed;
+            Name = name;
+            Speed = speed;
         }
+
+        public string Name { get; private set; }
+        public int Speed { get; private set; }
     }
 }
