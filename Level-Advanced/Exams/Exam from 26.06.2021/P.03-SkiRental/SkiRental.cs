@@ -7,75 +7,50 @@ namespace SkiRental
 {
     public class SkiRental
     {
-        public List<Ski> Ski { get; set; }
-        public string Name { get; set; }
-        public int Capacity { get; set; }
+        private List<Ski> skiCollection;
 
         public SkiRental(string name, int capacity)
         {
-            this.Name = name;
-            this.Capacity = capacity;
-            this.Ski = new List<Ski>();
+            Name = name;
+            Capacity = capacity;
+            skiCollection = new List<Ski>();
         }
-
-        public int Count => Ski.Count;
+        public string Name { get; private set; }
+        public int Capacity { get; private set; }
+        public IReadOnlyCollection<Ski> SkiCollection => skiCollection;
+        public int Count => skiCollection.Count;
 
         public void Add(Ski ski)
         {
-            if (Ski.Count < Capacity)
+            if (Capacity > skiCollection.Count)
             {
-                Ski.Add(ski);
+                skiCollection.Add(ski);
             }
         }
 
         public bool Remove(string manufacturer, string model)
         {
-            Ski ski = Ski.Where(x => x.Manufacturer == manufacturer && x.Model == model)
+            Ski ski = skiCollection
+                .Where(x => x.Manufacturer == manufacturer && x.Model == model)
                 .FirstOrDefault();
 
             if (ski != null)
             {
-                Ski.Remove(ski);
+                skiCollection.Remove(ski);
 
                 return true;
             }
+
             return false;
         }
 
-        public Ski GetNewestSki()
-        {
-            if (Ski.Count == 0)
-            {
-                return null;
-            }
+        public Ski GetNewestSki() => skiCollection
+            .OrderByDescending(x => x.Year)
+            .FirstOrDefault();
 
-            int newestYear = int.MinValue;
-            Ski ski = null;
-
-            foreach (var item in Ski)
-            {
-                if (item.Year > newestYear)
-                {
-                    newestYear = item.Year;
-                    ski = item;
-                }
-            }
-
-            return ski;
-        }
-
-        public Ski GetSki(string manufacturer, string model)
-        {
-            Ski ski = Ski.Where(x => x.Manufacturer == manufacturer && x.Model == model)
-                .FirstOrDefault();
-
-            if (ski != null)
-            {
-                return ski;
-            }
-
-            return null;
-        }
+        public Ski GetSki(string manufacturer, string model) => skiCollection
+            .FirstOrDefault(x => x.Manufacturer == manufacturer
+            && x.Model == model);
 
         public string GetStatistics()
         {
@@ -83,9 +58,9 @@ namespace SkiRental
 
             sb.AppendLine($"The skis stored in {Name}:");
 
-            foreach (var item in Ski)
+            foreach (var ski in skiCollection)
             {
-                sb.AppendLine($"{item.ToString()}");
+                sb.AppendLine(ski.ToString());
             }
 
             return sb.ToString().TrimEnd();
