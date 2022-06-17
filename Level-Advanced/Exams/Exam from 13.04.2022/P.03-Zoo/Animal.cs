@@ -6,22 +6,22 @@ namespace Zoo
 {
     public class Animal
     {
-        public string Species { get; set; } 
-        public string Diet { get; set; }
-        public double Weight { get; set; }
-        public double Length { get; set; }
-
         public Animal(string species, string diet, double weight, double length)
         {
-            this.Species = species;
-            this.Diet = diet;
-            this.Weight = weight;
-            this.Length = length;
+            Species = species;
+            Diet = diet;
+            Weight = weight;
+            Length = length;
         }
+
+        public string Species { get; private set; }
+        public string Diet { get; private set; }
+        public double Weight { get; private set; }
+        public double Length { get; private set; }
 
         public override string ToString()
         {
-            return $"The {this.Species} is a {this.Diet} and weighs {this.Weight} kg.";
+            return $"The {Species} is a {Diet} and weighs {Weight} kg.";
         }
     }
 }

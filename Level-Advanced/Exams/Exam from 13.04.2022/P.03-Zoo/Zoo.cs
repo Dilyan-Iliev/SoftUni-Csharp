@@ -7,16 +7,16 @@ namespace Zoo
 {
     public class Zoo
     {
-        public List<Animal> Animals { get; set; }
-        public string Name { get; set; }
-        public int Capacity { get; set; }
-
         public Zoo(string name, int capacity)
         {
-            this.Name = name;
-            this.Capacity = capacity;
-            this.Animals = new List<Animal>();
+            Name = name;
+            Capacity = capacity;
+            Animals = new List<Animal>();
         }
+
+        public string Name { get; private set; }
+        public int Capacity { get; private set; }
+        public List<Animal> Animals { get; set; }
 
         public string AddAnimal(Animal animal)
         {
@@ -30,40 +30,62 @@ namespace Zoo
                 return "Invalid animal diet.";
             }
 
-            if (Animals.Count >= this.Capacity)
+            if (Animals.Count >= Capacity)
             {
                 return "The zoo is full.";
             }
 
             Animals.Add(animal);
+
             return $"Successfully added {animal.Species} to the zoo.";
         }
 
         public int RemoveAnimals(string species)
         {
-            var removedAnimals = Animals.FindAll(animal => animal.Species == species).ToList();
+            if (!HasElementInCollection())
+            {
+                return 0;
+            }
+
+            var animalsToRemove = Animals.Where(x => x.Species == species).ToList();
+
             Animals.RemoveAll(x => x.Species == species);
 
-            return removedAnimals.Count;
+            return animalsToRemove.Count();
         }
 
         public List<Animal> GetAnimalsByDiet(string diet)
         {
-            var filteredByDietAnimals = Animals.FindAll(x => x.Diet == diet);
+            if (!HasElementInCollection())
+            {
+                return null;
+            }
 
-            return filteredByDietAnimals.ToList();
+            return Animals.Where(x => x.Diet == diet).ToList();
         }
 
-        public Animal GetAnimalByWeight(double weight)
-        {
-            return Animals.First(x => x.Weight == weight);
-        }
+        public Animal GetAnimalByWeight(double weight) => Animals
+            .Where(x => x.Weight == weight)
+            .FirstOrDefault();
 
         public string GetAnimalCountByLength(double minimumLength, double maximumLength)
         {
-            var filteredAnimalsByLength = Animals.FindAll(x => x.Length >= minimumLength && x.Length <= maximumLength).ToList();
+            var searchedAnimals = Animals
+                .Where(x => x.Length >= minimumLength && x.Length <= maximumLength)
+                .ToList();
 
-            return $"There are {filteredAnimalsByLength.Count} animals with a length between {minimumLength} and {maximumLength} meters.";
+            return $"There are {searchedAnimals.Count} animals with a length between {minimumLength} and {maximumLength} meters.";
+        }
+
+
+        private bool HasElementInCollection()
+        {
+            if (!Animals.Any())
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
