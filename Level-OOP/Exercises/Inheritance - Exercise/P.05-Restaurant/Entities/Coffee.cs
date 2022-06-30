@@ -11,8 +11,9 @@ namespace Restaurant
         public Coffee(string name, double caffeine)
             : base(name, CoffeePrice, CoffeeMilliliters)
         {
-            this.Caffeine = caffeine;
+            Caffeine = caffeine;
         }
-        public double Caffeine { get; set; }
+
+        public double Caffeine { get; private set; } 
     }
 }

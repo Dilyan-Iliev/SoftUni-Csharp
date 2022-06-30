@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Restaurant
 {
-    public class Product
+    public abstract class Product : IProduct
     {
         public Product(string name, decimal price)
         {
@@ -12,7 +12,8 @@ namespace Restaurant
             Price = price;
         }
 
-        public string Name { get; set; }
-        public decimal Price { get; set; }
+        public string Name { get; private set; }
+
+        public decimal Price { get; private set; }
     }
 }

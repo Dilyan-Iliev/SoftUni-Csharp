@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Restaurant
 {
-    public class Starter : Food
+    public abstract class MainDish : Food
     {
-        public Starter(string name, decimal price, double grams) 
+        protected MainDish(string name, decimal price, double grams) 
             : base(name, price, grams)
         {
         }
