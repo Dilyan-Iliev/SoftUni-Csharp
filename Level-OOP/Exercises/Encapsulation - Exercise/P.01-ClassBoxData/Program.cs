@@ -1,32 +1,21 @@
-﻿using System;
+﻿using PracticeForJudge.Core;
+using PracticeForJudge.Core.Interfaces;
+using PracticeForJudge.IO;
+using PracticeForJudge.IO.Interfaces;
+using PracticeForJudge.Models;
 
-namespace P._01_ClassBoxData
+namespace PracticeForJudge
 {
     public class StartUp
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            double length = double.Parse(Console.ReadLine());
-            double width = double.Parse(Console.ReadLine());
-            double height = double.Parse(Console.ReadLine());
+            IWriter writer = new Writer();
+            IReader reader = new Reader();
+            IController controller = new Controller();
 
-            try
-            {
-                Box box = new Box(length, width, height);
-                var surfaceArea = box.SurfaceArea();
-                var lateralSurfaceArea = box.LateralSurfaceArea();
-                var volume = box.Volume();
-
-                Console.WriteLine($"Surface Area - {surfaceArea:f2}");
-                Console.WriteLine($"Lateral Surface Area - {lateralSurfaceArea:f2}");
-                Console.WriteLine($"Volume - {volume:f2}");
-            }
-            catch (ArgumentException ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-
+            IEngine engine = new Engine(writer, reader, controller);
+            engine.Run();
         }
     }
 }
