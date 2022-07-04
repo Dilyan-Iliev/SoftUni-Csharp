@@ -1,4 +1,5 @@
-﻿using PersonsInfo.IO;
+﻿using _5.Core.Interfaces;
+using _5.IO.Interfaces;
 using System.Linq;
 
 namespace PersonsInfo.Core

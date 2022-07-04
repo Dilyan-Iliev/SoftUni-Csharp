@@ -1,4 +1,5 @@
-﻿using PersonsInfo.Models;
+﻿using _5.Core.Interfaces;
+using PersonsInfo.Models;
 
 namespace PersonsInfo.Core
 {

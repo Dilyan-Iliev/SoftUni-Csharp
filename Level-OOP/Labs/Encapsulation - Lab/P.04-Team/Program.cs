@@ -1,4 +1,6 @@
-﻿using PersonsInfo.Core;
+﻿using _5.Core.Interfaces;
+using _5.IO.Interfaces;
+using PersonsInfo.Core;
 using PersonsInfo.IO;
 using System;
 
