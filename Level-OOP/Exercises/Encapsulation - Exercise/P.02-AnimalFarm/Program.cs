@@ -1,27 +1,20 @@
-﻿namespace AnimalFarm
-{
-    using System;
-    using AnimalFarm.Models;
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            string name = Console.ReadLine();
-            int age = int.Parse(Console.ReadLine());
+﻿using PracticeForJudge.Core;
+using PracticeForJudge.Core.Interfaces;
+using PracticeForJudge.IO;
+using PracticeForJudge.IO.Interfaces;
 
-            try
-            {
-                Chicken chicken = new Chicken(name, age);
-                Console.WriteLine(
-                    "Chicken {0} (age {1}) can produce {2} eggs per day.",
-                    chicken.Name,
-                    chicken.Age,
-                    chicken.ProductPerDay);
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+namespace PracticeForJudge
+{
+    public class StartUp
+    {
+        static void Main()
+        {
+            IWriter writer = new ConsoleWriter();
+            IReader reader = new ConsoleReader();
+            IController controller = new Controller();
+
+            IEngine engine = new Engine(writer, reader, controller);
+            engine.Run();
         }
     }
 }
