@@ -1,11 +1,11 @@
-﻿using P._05_Birthday_Celebrations.Interfaces;
+﻿using _7.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace P._05_Birthday_Celebrations.Classes
+namespace _7.Models
 {
-    public class Pet : IInformational
+    public class Pet : IBirthdate
     {
         public Pet(string name, string birthdate)
         {
@@ -14,7 +14,6 @@ namespace P._05_Birthday_Celebrations.Classes
         }
 
         public string Name { get; private set; }
-
         public string Birthdate { get; private set; }
     }
 }

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace P._05_Birthday_Celebrations.Interfaces
+namespace _7.Models.Interfaces
 {
-    public interface IInformational
+    public interface IBirthdate
     {
-        string Name { get; }
         string Birthdate { get; }
     }
 }
