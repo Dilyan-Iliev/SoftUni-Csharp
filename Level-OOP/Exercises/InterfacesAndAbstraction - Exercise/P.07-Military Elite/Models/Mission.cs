@@ -1,7 +1,7 @@
-﻿using P._07_Military_Elite.Enums;
-using P._07_Military_Elite.Interfaces;
+﻿using LocalPractice.Models.Enumerators;
+using LocalPractice.Models.Interfaces;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class Mission : IMission
     {

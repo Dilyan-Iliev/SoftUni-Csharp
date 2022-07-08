@@ -1,14 +1,15 @@
-﻿using P._07_Military_Elite.Enums;
-using P._07_Military_Elite.Interfaces;
+﻿using LocalPractice.Models.Abstract_classes;
+using LocalPractice.Models.Enumerators;
+using LocalPractice.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class Engineer : SpecialisedSoldier, IEngineer
     {
-        public Engineer(int iD, string firstName, string lastName, decimal salary, Corps corps) 
+        public Engineer(int iD, string firstName, string lastName, decimal salary, Corps corps)
             : base(iD, firstName, lastName, salary, corps)
         {
             this.Repairs = new List<IRepair>();

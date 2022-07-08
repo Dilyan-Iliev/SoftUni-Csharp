@@ -1,15 +1,15 @@
-﻿using P._07_Military_Elite.Enums;
-using P._07_Military_Elite.Interfaces;
-using System;
+﻿using LocalPractice.Models.Abstract_classes;
+using LocalPractice.Models.Enumerators;
+using LocalPractice.Models.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class Commando : SpecialisedSoldier, ICommando
     {
-        public Commando(int iD, string firstName, string lastName, decimal salary, Corps corps) 
+        public Commando(int iD, string firstName, string lastName, decimal salary, Corps corps)
             : base(iD, firstName, lastName, salary, corps)
         {
             this.Missions = new List<IMission>();

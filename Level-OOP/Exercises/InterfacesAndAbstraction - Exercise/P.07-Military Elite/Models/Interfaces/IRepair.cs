@@ -1,4 +1,4 @@
-﻿namespace P._07_Military_Elite.Interfaces
+﻿namespace LocalPractice.Models.Interfaces
 {
     public interface IRepair
     {

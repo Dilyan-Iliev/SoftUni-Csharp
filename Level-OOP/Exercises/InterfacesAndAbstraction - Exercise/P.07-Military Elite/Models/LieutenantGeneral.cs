@@ -1,9 +1,9 @@
-﻿using P._07_Military_Elite.Interfaces;
+﻿using LocalPractice.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class LieutenantGeneral : Private, ILieutenantGeneral
     {//Private наследява Soldier, поради което и този клас наследява Soldier

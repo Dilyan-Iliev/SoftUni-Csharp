@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace P._07_Military_Elite.Interfaces
+namespace LocalPractice.Models.Interfaces
 {
     public interface ICommando : ISpecialisedSoldier
     {

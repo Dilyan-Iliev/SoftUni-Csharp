@@ -1,9 +1,6 @@
-﻿using P._07_Military_Elite.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LocalPractice.Models.Interfaces;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class Repair : IRepair
     {
@@ -13,8 +10,8 @@ namespace P._07_Military_Elite.Classes
             HoursWorked = hoursWorked;
         }
 
-        public string PartName {get; private set;}
-                               
+        public string PartName { get; private set; }
+
         public int HoursWorked { get; private set; }
 
         public override string ToString()

@@ -1,9 +1,6 @@
-﻿using P._07_Military_Elite.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LocalPractice.Models.Interfaces;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models.Abstract_classes
 {
     public abstract class Soldier : ISoldier
     {//абстрактен е понеже не ми трябва да създам просто войник, а да създам конкретен тип войник

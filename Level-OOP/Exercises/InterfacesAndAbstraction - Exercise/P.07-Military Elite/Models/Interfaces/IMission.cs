@@ -1,6 +1,6 @@
-﻿using P._07_Military_Elite.Enums;
+﻿using LocalPractice.Models.Enumerators;
 
-namespace P._07_Military_Elite.Interfaces
+namespace LocalPractice.Models.Interfaces
 {
     public interface IMission
     {

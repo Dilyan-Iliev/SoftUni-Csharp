@@ -1,9 +1,7 @@
-﻿using P._07_Military_Elite.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LocalPractice.Models.Abstract_classes;
+using LocalPractice.Models.Interfaces;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class Private : Soldier, IPrivate
     {//наследявам IPrivate, а не ISoldier, понеже IPrivate наследява ISoldier

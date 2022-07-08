@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace P._07_Military_Elite.Interfaces
+namespace LocalPractice.Models.Interfaces
 {
     public interface ILieutenantGeneral : IPrivate
     {
-        List<IPrivate> Privates { get; set; } 
+        List<IPrivate> Privates { get; set; }
     }
 }

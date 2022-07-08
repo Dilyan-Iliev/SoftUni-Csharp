@@ -1,13 +1,12 @@
-﻿using P._07_Military_Elite.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using LocalPractice.Models.Abstract_classes;
+using LocalPractice.Models.Interfaces;
 using System.Text;
 
-namespace P._07_Military_Elite.Classes
+namespace LocalPractice.Models
 {
     public class Spy : Soldier, ISpy
     {
-        public Spy(int iD, string firstName, string lastName, int codeNumber) 
+        public Spy(int iD, string firstName, string lastName, int codeNumber)
             : base(iD, firstName, lastName)
         {
             this.CodeNumber = codeNumber;
