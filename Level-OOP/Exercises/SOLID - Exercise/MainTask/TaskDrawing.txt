@@ -1,0 +1,14 @@
+ILayout : could be implemented by SimpleLayout
+    -string Format {get;}
+    
+    
+IAppender : ConsoleAppender, FileAppender
+    -ILayout Layout {get;}
+    -void Append(string datetime, string reportLevel, string message);
+    
+    
+ILogger : Logger
+    -IAppender Appender {get;}
+    -void Error(string datetime, string message);
+    -void Warning(string datetime, string message);
+    -void Critical(string datetime, string message);
