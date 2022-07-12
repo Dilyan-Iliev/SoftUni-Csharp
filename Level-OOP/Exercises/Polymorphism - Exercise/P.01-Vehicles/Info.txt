@@ -1,3 +1,0 @@
-This task is made both with interface and with abstract class. 
-- IVehicle is the interface and Car & Truck implement this interface ;
-- Vehicle is the abstract class and Car2 & Truck2 inherited this abstract class.
