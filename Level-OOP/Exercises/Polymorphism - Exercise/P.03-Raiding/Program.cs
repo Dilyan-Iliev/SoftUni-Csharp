@@ -1,46 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Raiding
+﻿namespace Shapes
 {
-    public class StartUp
+    using _8.IO;
+    using _8.Engine;
+    using _8.IO.Interfaces;
+    using _8.Engine.Interfaces;
+
+    public class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            int n = int.Parse(Console.ReadLine());
-            List<BaseHero> heroes = new List<BaseHero>();
-            BaseHero hero = null;
-            int validHeroesMade = 0;
+            IWriter writer = new ConsoleWriter();
+            IReader reader = new ConsoleReader();
 
-            while (validHeroesMade != n)
-            {
-                string heroName = Console.ReadLine();
-                string heroType = Console.ReadLine();
-
-                switch (heroType)
-                {
-                    case "Paladin": hero = new Paladin(heroName); break;
-                    case "Druid": hero = new Druid(heroName); break;
-                    case "Warrior": hero = new Warrior(heroName); break;
-                    case "Rogue": hero = new Rogue(heroName); break;
-                    default:
-                        Console.WriteLine("Invalid hero!");
-                        continue;
-                }
-
-                heroes.Add(hero);
-                validHeroesMade++;
-            }
-
-            heroes.ForEach(x => Console.WriteLine(x.CastAbility()));
-
-            long bossPower = int.Parse(Console.ReadLine());
-            long powers = heroes.Sum(x => x.Power);
-            bool isWin = powers >= bossPower;
-
-            string result = isWin ? "Victory!" : "Defeat...";
-            Console.WriteLine(result);
+            IEngine engine = new Engine(writer, reader);
+            engine.Run();
         }
     }
 }
