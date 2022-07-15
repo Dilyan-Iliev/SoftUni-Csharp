@@ -1,18 +1,18 @@
-﻿namespace Shapes
+﻿using PracticeForJudge.IO;
+using PracticeForJudge.Core;
+using PracticeForJudge.IO.Interfaces;
+using PracticeForJudge.Core.Interfaces;
+
+namespace PracticeForJudge
 {
-    using _8.IO;
-    using _8.Engine;
-    using _8.IO.Interfaces;
-    using _8.Engine.Interfaces;
-
-    public class Program
+    public class StartUp
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            IWriter writer = new ConsoleWriter();
             IReader reader = new ConsoleReader();
+            IWriter writer = new ConsoleWriter();
 
-            IEngine engine = new Engine(writer, reader);
+            IEngine engine = new Engine(reader, writer);
             engine.Run();
         }
     }

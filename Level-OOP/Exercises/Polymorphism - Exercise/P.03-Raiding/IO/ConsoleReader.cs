@@ -1,7 +1,7 @@
-﻿namespace _8.IO
+﻿namespace PracticeForJudge.IO
 {
     using System;
-    using _8.IO.Interfaces;
+    using PracticeForJudge.IO.Interfaces;
 
     public class ConsoleReader : IReader
     {

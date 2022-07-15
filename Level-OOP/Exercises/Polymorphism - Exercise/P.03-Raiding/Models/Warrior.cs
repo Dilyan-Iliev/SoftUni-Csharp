@@ -1,4 +1,4 @@
-﻿namespace _8.Models
+﻿namespace PracticeForJudge.Models
 {
     public class Warrior : Hero
     {
@@ -10,6 +10,6 @@
         }
 
         public override string CastAbility()
-         => $"{this.GetType().Name} - {Name} hit for {Power} damage";
+         => $"{this.GetType().Name} - {Name} hit for {Power}";
     }
 }

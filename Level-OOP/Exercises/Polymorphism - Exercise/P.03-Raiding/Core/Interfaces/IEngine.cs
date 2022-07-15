@@ -1,4 +1,4 @@
-﻿namespace _8.Engine.Interfaces
+﻿namespace PracticeForJudge.Core.Interfaces
 {
     public interface IEngine
     {

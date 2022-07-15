@@ -1,4 +1,4 @@
-﻿namespace _8.IO.Interfaces
+﻿namespace PracticeForJudge.IO.Interfaces
 {
     public interface IReader
     {

@@ -1,6 +1,5 @@
-﻿namespace _8.Models
+﻿namespace PracticeForJudge.Models
 {
-
     public class Paladin : Hero
     {
         private const int PaladinPower = 100;

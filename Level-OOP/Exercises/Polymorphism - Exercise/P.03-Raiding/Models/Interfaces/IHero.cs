@@ -1,11 +1,9 @@
-﻿namespace _8.Models.Interfaces
+﻿namespace PracticeForJudge.Models.Interfaces
 {
     public interface IHero
     {
         string Name { get; }
-
         int Power { get; }
-
         string CastAbility();
     }
 }

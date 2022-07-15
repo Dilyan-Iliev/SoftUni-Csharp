@@ -1,4 +1,4 @@
-﻿namespace _8.Models
+﻿namespace PracticeForJudge.Models
 {
     public class Druid : Hero
     {

@@ -1,6 +1,6 @@
-﻿namespace _8.Models
+﻿namespace PracticeForJudge.Models
 {
-    using _8.Models.Interfaces;
+    using PracticeForJudge.Models.Interfaces;
 
     public abstract class Hero : IHero
     {
@@ -10,7 +10,7 @@
             Power = power;
         }
 
-        public string Name { get; protected set; }
+        public string Name {get; protected set;}
 
         public int Power { get; protected set; }
 
