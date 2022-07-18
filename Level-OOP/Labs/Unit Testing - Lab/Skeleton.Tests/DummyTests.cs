@@ -6,12 +6,16 @@ namespace Skeleton.Tests
     [TestFixture]
     public class DummyTests
     {
+        private const int Health = 2;
+        private const int Experience = 5;
+        private const int AttackPoints = 2;
+
         private Dummy dummy;
 
         [SetUp]
         public void InitializeTest()
         {
-            this.dummy = new Dummy(5, 5);
+            this.dummy = new Dummy(Health, Experience);
         }
 
         [Test]
@@ -19,9 +23,13 @@ namespace Skeleton.Tests
         {
             //•	Dummy loses health if attacked
 
-            dummy.TakeAttack(2);
+            dummy.TakeAttack(AttackPoints);
 
-            Assert.AreEqual(3, dummy.Health);
+            //Assert.AreEqual(0, dummy.Health);
+
+            //or
+
+            Assert.IsTrue(dummy.Health < Health);
         }
 
         [Test]
@@ -29,9 +37,9 @@ namespace Skeleton.Tests
         {
             //•	Dead Dummy throws an exception if attacked
 
-            dummy.TakeAttack(5);
+            dummy.TakeAttack(AttackPoints);
 
-            Assert.Throws<InvalidOperationException>(() => dummy.TakeAttack(5));
+            Assert.Throws<InvalidOperationException>(() => dummy.TakeAttack(AttackPoints));
         }
 
         [Test]
@@ -39,7 +47,11 @@ namespace Skeleton.Tests
         {
             //•	Dead Dummy can give XP
 
-            dummy.TakeAttack(5);
+            dummy.TakeAttack(AttackPoints);
+
+            //Assert.AreEqual(dummy.GiveExperience(), Experience);
+
+            //or 
 
             Assert.IsTrue(dummy.IsDead());
         }
@@ -49,7 +61,7 @@ namespace Skeleton.Tests
         {
             //•	Alive Dummy can't give XP
 
-            dummy.TakeAttack(3);
+            dummy.TakeAttack(AttackPoints);
             
             Assert.IsFalse(dummy.IsDead());
         }
