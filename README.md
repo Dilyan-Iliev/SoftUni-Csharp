@@ -8,5 +8,5 @@ Here are my solutions to all my homeworks during my education at SoftUni
 2.2.[**Level Advanced - Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Advanced/Exercises) ;
 2.3.[**Level Advanced - Exams**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Advanced/Exams)
 
-3.1 [**Level O1OP - Labs**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Labs) ;
+3.1 [**Level OOP - Labs**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Labs) ;
 3.2 [**Level OOP - Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Exercises) ;
