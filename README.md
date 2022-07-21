@@ -10,5 +10,3 @@ Here are my solutions to all my homeworks during my education at SoftUni
 
 3.1 [**Level OOP - Labs**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Labs) ;
 3.2 [**Level OOP - Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Exercises) ;
- 
- 
