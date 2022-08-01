@@ -1,5 +1,3 @@
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=DilyanIliev)](https://git.io/streak-stats)
-
 Here are my solutions to all my homeworks during my education at SoftUni 
 
 1.1 [**Level Fundamentals - Labs**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Fundamentals/Labs) ;
