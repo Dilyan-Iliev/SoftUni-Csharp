@@ -1,4 +1,4 @@
-This repo contains all tasks that were solved by myself during the C# Fundamentals, C# Advanced and C# Object-Oriented Programming Courses at SoftUni. Here is a list of all topics that were covered during the courses. The courses Basic and Fundamentals are embeded in the same folder due to their nature.
+This repo contains all tasks that were solved by myself during the C# Fundamentals, C# Advanced and C# Object-Oriented Programming Courses at SoftUni. Here is a list of all topics that were covered during the courses.
 
 C# Basic and C# Fundamentals: • Basic Syntax, Conditional Statements and Loops • Exercise: Basic Syntax, Conditional Statements and Loops • Data Types and Variables • Arrays • Methods • List • Objects and Classes • Associative Arrays • Text Processing • Regular Expressions • Database Basics
 
