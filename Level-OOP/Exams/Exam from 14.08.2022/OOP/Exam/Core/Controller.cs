@@ -1,6 +1,7 @@
 ﻿namespace PlanetWars.Core
 {
     using PlanetWars.Core.Contracts;
+    using PlanetWars.Factories;
     using PlanetWars.Models.MilitaryUnits;
     using PlanetWars.Models.MilitaryUnits.Contracts;
     using PlanetWars.Models.Planets;
@@ -31,16 +32,8 @@
                 throw new InvalidOperationException($"Planet {planetName} does not exist!");
             }
 
-            IMilitaryUnit militaryUnit = null;
-
-            switch (unitTypeName)
-            {
-                case nameof(SpaceForces): militaryUnit = new SpaceForces(); break;
-                case nameof(AnonymousImpactUnit): militaryUnit = new AnonymousImpactUnit(); break;
-                case nameof(StormTroopers): militaryUnit = new StormTroopers(); break;
-                default:
-                    throw new InvalidOperationException($"{unitTypeName} still not available!");
-            }
+            MilitaryUnitFactory militaryFactory = new MilitaryUnitFactory();
+            IMilitaryUnit militaryUnit = militaryFactory.Create(unitTypeName);
 
             if (planet.Army.Any(x => x.GetType().Name == unitTypeName))
             {
@@ -62,16 +55,8 @@
                 throw new InvalidOperationException($"Planet {planetName} does not exist!");
             }
 
-            IWeapon weapon = null;
-
-            switch (weaponTypeName)
-            {
-                case nameof(BioChemicalWeapon): weapon = new BioChemicalWeapon(destructionLevel); break;
-                case nameof(NuclearWeapon): weapon = new NuclearWeapon(destructionLevel); break;
-                case nameof(SpaceMissiles): weapon = new SpaceMissiles(destructionLevel); break;
-                default:
-                    throw new InvalidOperationException($"{weaponTypeName} still not available!");
-            }
+            WeaponFactory weaponFactory = new WeaponFactory();
+            IWeapon weapon = weaponFactory.Create(weaponTypeName, destructionLevel);
 
             if (planet.Weapons.Any(x => x.GetType().Name == weaponTypeName))
             {
@@ -188,12 +173,7 @@
                 throw new InvalidOperationException("No units available for upgrade!");
             }
 
-            //planet.Army.ToList().ForEach(x => x.IncreaseEndurance());
-
-            foreach (var unit in planet.Army)
-            {
-                unit.IncreaseEndurance();
-            }
+            planet.Army.ToList().ForEach(x => x.IncreaseEndurance());
 
             planet.Spend(1.25);
             return $"{planetName} has upgraded its forces!";
