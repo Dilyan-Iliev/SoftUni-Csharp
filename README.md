@@ -11,6 +11,13 @@
 2. [**Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Fundamentals/Exercises)
 3. [**Exams**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-Fundamentals/Exams)
   </details>
+ 
+ ***
+ <details>
+ <summary><h3>MSSQL Carriculum List</summary>
+
+1. [**Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-DB/MSSQL/Exercises) 
+2. [**Exams**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-DB/MSSQL/Exams)
   
 ***
  <details>
@@ -28,11 +35,3 @@
 1. [**Labs**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Labs)
 2. [**Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Exercises) 
 3. [**Exams**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-OOP/Exams)
-
-
-***
- <details>
- <summary><h3>MSSQL Carriculum List</summary>
-
-1. [**Exercises**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-DB/MSSQL/Exercises) 
-2. [**Exams**](https://github.com/Dilyan-Iliev/SoftUni-Csharp/tree/main/Level-DB/MSSQL/Exams)
