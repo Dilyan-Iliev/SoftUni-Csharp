@@ -1,8 +1,10 @@
 ﻿namespace BookShop
 {
+    using BookShop.Models;
     using BookShop.Models.Enums;
     using Data;
     using Initializer;
+    using Microsoft.EntityFrameworkCore;
     using System.Text;
 
     public class StartUp
@@ -12,8 +14,8 @@
             using var db = new BookShopContext();
             //DbInitializer.ResetDatabase(db);
 
-            int cmd = int.Parse(Console.ReadLine());
-            Console.WriteLine(GetBooksNotReleasedIn(db, cmd));
+            string cmd = Console.ReadLine();
+            Console.WriteLine(GetBooksReleasedBefore(db, cmd));
         }
 
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
@@ -75,6 +77,68 @@
                 .ToArray();
 
             return string.Join(Environment.NewLine, bookTitles);
+        }
+
+        public static string GetBooksByCategory(BookShopContext context, string input)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string[] categories = input
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                .ToArray();
+
+            IQueryable<BookCategory> dbBooks = context
+                .BooksCategories
+                .Include(bc => bc.Category)
+                .Include(bc => bc.Book);
+
+            List<BookCategory> books = new List<BookCategory>();
+
+            foreach (var category in categories)
+            {
+                foreach (var book in dbBooks)
+                {
+                    if (book.Category.Name.ToLower() == category.ToLower())
+                    {
+                        books.Add(book);
+                    }
+                }
+            }
+
+            var titles = books
+                .OrderBy(b => b.Book.Title)
+                .Select(b => b.Book.Title)
+                .ToList();
+
+            return string.Join(Environment.NewLine, titles);
+        }
+
+        public static string GetBooksReleasedBefore(BookShopContext context, string date)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var inputStringArray = date.Split("-").Reverse().ToArray();
+            var newStringDate = String.Join("-", inputStringArray);
+            DateTime formatedDate = DateTime.Parse(newStringDate);
+
+            var books = context
+                .Books
+                .Where(b => b.ReleaseDate.HasValue && b.ReleaseDate.Value < formatedDate)
+                .OrderByDescending(b => b.ReleaseDate)
+                .Select(b => new
+                {
+                    b.Title,
+                    b.EditionType,
+                    b.Price
+                })
+                .ToArray();
+
+            foreach (var book in books)
+            {
+                sb.AppendLine($"{book.Title} - {book.EditionType} - ${book.Price:f2}");
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
