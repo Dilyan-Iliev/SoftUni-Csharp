@@ -15,7 +15,7 @@
             //DbInitializer.ResetDatabase(db);
 
             string cmd = Console.ReadLine();
-            Console.WriteLine(GetBooksReleasedBefore(db, cmd));
+            Console.WriteLine(GetAuthorNamesEndingIn(db, cmd));
         }
 
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
@@ -136,6 +136,29 @@
             foreach (var book in books)
             {
                 sb.AppendLine($"{book.Title} - {book.EditionType} - ${book.Price:f2}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        public static string GetAuthorNamesEndingIn(BookShopContext context, string input)
+        {
+            var sb = new StringBuilder();
+
+            var authors = context
+                .Authors
+                .AsEnumerable()
+                .Where(a => a.FirstName.EndsWith(input))
+                .Select(a => new
+                {
+                    FullName = $"{a.FirstName} {a.LastName}"
+                })
+                .OrderBy(a => a.FullName)
+                .ToArray();
+
+            foreach (var author in authors)
+            {
+                sb.AppendLine(author.FullName);
             }
 
             return sb.ToString().TrimEnd();
