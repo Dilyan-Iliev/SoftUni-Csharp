@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ProductShop.DTOs.Export.Products;
+using ProductShop.DTOs.Export.Users;
 using ProductShop.DTOs.Import;
 using ProductShop.Models;
 
@@ -19,6 +20,20 @@ namespace ProductShop
             this.CreateMap<Product, ProductsInRangeModel>()
                     .ForMember(m => m.Seller, opt =>
                         opt.MapFrom(src => $"{src.Seller.FirstName} {src.Seller.LastName}"));
+
+            //Inner dto
+            this.CreateMap<Product, SoldProductsModel>()
+                .ForMember(m => m.BuyerFirstName, opt =>
+                    opt.MapFrom(src => src.Buyer.FirstName))
+                .ForMember(m => m.BuyerLastname, opt =>
+                    opt.MapFrom(src => src.Buyer.LastName));
+            //Outer dto
+            this.CreateMap<User, UserWithSoldProductsModel>()
+                .ForMember(m => m.SoldProducts, opt =>
+                    opt.MapFrom(src => src.ProductsSold
+                        .Where(ps => ps.BuyerId.HasValue)));
+
+
         }
     }
 }

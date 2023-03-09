@@ -5,6 +5,7 @@
     using Newtonsoft.Json;
     using ProductShop.Data;
     using ProductShop.DTOs.Export.Products;
+    using ProductShop.DTOs.Export.Users;
     using ProductShop.DTOs.Import;
     using ProductShop.Models;
 
@@ -25,8 +26,8 @@
             //Console.WriteLine(ImportCategories(dbContext, jsonFile));
 
             //For task 5 to 8 use this
-            string result = GetProductsInRange(dbContext);
-            //File.WriteAllText("../../../Results/productsInRange.json", result);
+            string result = GetSoldProducts(dbContext);
+            //File.WriteAllText("../../../Results/userWithSoldProducts.json", result);
         }
 
         //Task.01
@@ -64,8 +65,6 @@
         //Task.03
         public static string ImportCategories(ProductShopContext context, string inputJson)
         {
-            ConfigMapper();
-
             CategoryModel[] categoryModels = JsonConvert.DeserializeObject<CategoryModel[]>(inputJson);
 
             List<Category> categories = mapper.Map<ICollection<Category>>(categoryModels)
@@ -83,7 +82,6 @@
         //Task.04
         public static string ImportCategoryProducts(ProductShopContext context, string inputJson)
         {
-            ConfigMapper();
             CategoryProductModel[] categoryProductModels =
                 JsonConvert.DeserializeObject<CategoryProductModel[]>(inputJson);
 
@@ -102,8 +100,6 @@
         //Task.05
         public static string GetProductsInRange(ProductShopContext context)
         {
-            ConfigMapper();
-
             var products = context
                 .Products
                 .Where(p => p.Price >= 500 && p.Price <= 1000)
@@ -112,6 +108,21 @@
                 .ToArray();
 
             return JsonConvert.SerializeObject(products, Formatting.Indented);
+        }
+
+        //Task.06
+        public static string GetSoldProducts(ProductShopContext context)
+        {
+            ConfigMapper();
+            var userWithSoldProducts = context
+                .Users
+                .Where(u => u.ProductsSold.Any(p => p.BuyerId.HasValue))
+                .ProjectTo<UserWithSoldProductsModel>(mapper.ConfigurationProvider)
+                .OrderBy(u => u.LastName)
+                .ThenBy(u => u.FirstName)
+                .ToArray();
+
+            return JsonConvert.SerializeObject(userWithSoldProducts, Formatting.Indented);
         }
 
         private static void ConfigMapper()
