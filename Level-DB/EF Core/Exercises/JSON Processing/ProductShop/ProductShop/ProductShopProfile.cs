@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ProductShop.DTOs.Export.Categories;
 using ProductShop.DTOs.Export.Products;
 using ProductShop.DTOs.Export.Users;
 using ProductShop.DTOs.Import;
@@ -33,7 +34,11 @@ namespace ProductShop
                     opt.MapFrom(src => src.ProductsSold
                         .Where(ps => ps.BuyerId.HasValue)));
 
-
+            this.CreateMap<Category, CategoryByProductCountModel>()
+                .ForMember(m => m.Category, opt => opt.MapFrom(src => src.Name))
+                .ForMember(m => m.ProductsCount, opt => opt.MapFrom(src => src.CategoriesProducts.Count))
+                .ForMember(m => m.AveragePrice, opt => opt.MapFrom(src => src.CategoriesProducts.Average(p => p.Product.Price).ToString("f2")))
+                .ForMember(m => m.TotalRevenue, opt => opt.MapFrom(src => src.CategoriesProducts.Sum(p => p.Product.Price).ToString("f2")));
         }
     }
 }

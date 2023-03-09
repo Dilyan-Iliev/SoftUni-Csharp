@@ -4,6 +4,7 @@
     using AutoMapper.QueryableExtensions;
     using Newtonsoft.Json;
     using ProductShop.Data;
+    using ProductShop.DTOs.Export.Categories;
     using ProductShop.DTOs.Export.Products;
     using ProductShop.DTOs.Export.Users;
     using ProductShop.DTOs.Import;
@@ -26,8 +27,8 @@
             //Console.WriteLine(ImportCategories(dbContext, jsonFile));
 
             //For task 5 to 8 use this
-            string result = GetSoldProducts(dbContext);
-            //File.WriteAllText("../../../Results/userWithSoldProducts.json", result);
+            string result = GetCategoriesByProductsCount(dbContext);
+            //File.WriteAllText("../../../Results/categoriesByProductsCount.json", result);
         }
 
         //Task.01
@@ -113,7 +114,6 @@
         //Task.06
         public static string GetSoldProducts(ProductShopContext context)
         {
-            ConfigMapper();
             var userWithSoldProducts = context
                 .Users
                 .Where(u => u.ProductsSold.Any(p => p.BuyerId.HasValue))
@@ -123,6 +123,25 @@
                 .ToArray();
 
             return JsonConvert.SerializeObject(userWithSoldProducts, Formatting.Indented);
+        }
+
+        //Task.07
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            ConfigMapper();
+            var categories = context
+                .Categories
+                .ProjectTo<CategoryByProductCountModel>(mapper.ConfigurationProvider)
+                .OrderByDescending(c => c.ProductsCount)
+                .ToArray();
+
+            return JsonConvert.SerializeObject(categories, Formatting.Indented);
+        }
+
+        //Task.08
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+
         }
 
         private static void ConfigMapper()
