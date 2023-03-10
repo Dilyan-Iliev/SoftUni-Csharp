@@ -12,6 +12,8 @@ namespace CarDealer
             this.CreateMap<SupplierModel, Supplier>();
             this.CreateMap<PartModel, Part>();
             this.CreateMap<CarModel, Car>();
+            this.CreateMap<CustomerModel, Customer>();
+            this.CreateMap<SaleModel, Sale>();
         }
     }
 }
