@@ -3,77 +3,77 @@ Invalid Data
 Invalid Data
 Invalid Data
 Invalid Data
-Added Dota 2 (VaporStore.Data.Models.Genre) with 7 tags
-Added MONSTER HUNTER: WORLD (VaporStore.Data.Models.Genre) with 6 tags
-Added PLAYERUNKNOWN'S BATTLEGROUNDS (VaporStore.Data.Models.Genre) with 3 tags
-Added Counter-Strike: Global Offensive (VaporStore.Data.Models.Genre) with 8 tags
-Added Warframe (VaporStore.Data.Models.Genre) with 6 tags
-Added Tom Clancy's Rainbow Six Siege (VaporStore.Data.Models.Genre) with 6 tags
-Added Rocket League (VaporStore.Data.Models.Genre) with 11 tags
-Added Grand Theft Auto V (VaporStore.Data.Models.Genre) with 4 tags
-Added Planet Coaster (VaporStore.Data.Models.Genre) with 5 tags
-Added Warhammer 40,000: Gladius - Relics of War (VaporStore.Data.Models.Genre) with 8 tags
-Added Black Desert Online (VaporStore.Data.Models.Genre) with 6 tags
-Added Jurassic World Evolution (VaporStore.Data.Models.Genre) with 5 tags
-Added Team Fortress 2 (VaporStore.Data.Models.Genre) with 12 tags
-Added NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 (VaporStore.Data.Models.Genre) with 6 tags
-Added Path of Exile (VaporStore.Data.Models.Genre) with 8 tags
-Added Banished (VaporStore.Data.Models.Genre) with 2 tags
-Added Raft (VaporStore.Data.Models.Genre) with 5 tags
-Added War Thunder (VaporStore.Data.Models.Genre) with 7 tags
-Added Football Manager 2018 (VaporStore.Data.Models.Genre) with 6 tags
-Added Dead by Daylight (VaporStore.Data.Models.Genre) with 8 tags
-Added The Crew 2 (VaporStore.Data.Models.Genre) with 6 tags
-Added The Forest (VaporStore.Data.Models.Genre) with 5 tags
-Added House Flipper (VaporStore.Data.Models.Genre) with 4 tags
-Added Stardew Valley (VaporStore.Data.Models.Genre) with 5 tags
-Added Seeking Dawn (VaporStore.Data.Models.Genre) with 5 tags
-Added Paladins (VaporStore.Data.Models.Genre) with 6 tags
-Added Crash Bandicoot N. Sane Trilogy (VaporStore.Data.Models.Genre) with 5 tags
-Added RimWorld (VaporStore.Data.Models.Genre) with 3 tags
-Added Shadowverse CCG (VaporStore.Data.Models.Genre) with 5 tags
-Added Touhou: Scarlet Curiosity (VaporStore.Data.Models.Genre) with 5 tags
-Added Divinity: Original Sin 2 (VaporStore.Data.Models.Genre) with 15 tags
-Added Hunt Showdown (VaporStore.Data.Models.Genre) with 2 tags
-Added Darksiders III (VaporStore.Data.Models.Genre) with 5 tags
-Added FINAL FANTASY XIV Online (VaporStore.Data.Models.Genre) with 8 tags
-Added Warface (VaporStore.Data.Models.Genre) with 6 tags
-Added SMITE (VaporStore.Data.Models.Genre) with 3 tags
-Added Subnautica (VaporStore.Data.Models.Genre) with 5 tags
-Added Kingdom Come: Deliverance (VaporStore.Data.Models.Genre) with 5 tags
-Added World of Warships (VaporStore.Data.Models.Genre) with 7 tags
-Added Rust (VaporStore.Data.Models.Genre) with 12 tags
-Added Total War: WARHAMMER II (VaporStore.Data.Models.Genre) with 4 tags
-Added FOR HONOR (VaporStore.Data.Models.Genre) with 6 tags
-Added ARK: Survival Evolved (VaporStore.Data.Models.Genre) with 11 tags
-Added Dig or Die (VaporStore.Data.Models.Genre) with 8 tags
-Added NBA 2K18 (VaporStore.Data.Models.Genre) with 6 tags
-Added Terraria (VaporStore.Data.Models.Genre) with 9 tags
-Added Wreckfest (VaporStore.Data.Models.Genre) with 7 tags
-Added Shining Resonance Refrain (VaporStore.Data.Models.Genre) with 4 tags
-Added Trove (VaporStore.Data.Models.Genre) with 7 tags
-Added Yu-Gi-Oh! Duel Links (VaporStore.Data.Models.Genre) with 6 tags
-Added Factorio (VaporStore.Data.Models.Genre) with 8 tags
-Added Frostpunk (VaporStore.Data.Models.Genre) with 4 tags
-Added Slay the Spire (VaporStore.Data.Models.Genre) with 5 tags
-Added Beat Saber (VaporStore.Data.Models.Genre) with 2 tags
-Added Bridge Constructor Portal (VaporStore.Data.Models.Genre) with 5 tags
-Added The Elder Scrolls V: Skyrim Special Edition (VaporStore.Data.Models.Genre) with 4 tags
-Added Garry's Mod (VaporStore.Data.Models.Genre) with 11 tags
-Added DARK SOULS: REMASTERED (VaporStore.Data.Models.Genre) with 4 tags
-Added Guns, Gore and Cannoli 2 (VaporStore.Data.Models.Genre) with 11 tags
-Added Human: Fall Flat (VaporStore.Data.Models.Genre) with 9 tags
-Added Call of Duty: Black Ops III (VaporStore.Data.Models.Genre) with 9 tags
-Added Far Cry 5 (VaporStore.Data.Models.Genre) with 7 tags
-Added Conan Exiles (VaporStore.Data.Models.Genre) with 9 tags
-Added Brawlhalla (VaporStore.Data.Models.Genre) with 12 tags
-Added Vampyr (VaporStore.Data.Models.Genre) with 5 tags
-Added Squad (VaporStore.Data.Models.Genre) with 5 tags
-Added Neverwinter (VaporStore.Data.Models.Genre) with 6 tags
-Added Tom Clancy's Ghost Recon Wildlands (VaporStore.Data.Models.Genre) with 6 tags
-Added Arma 3 (VaporStore.Data.Models.Genre) with 14 tags
-Added Soul at Stake (VaporStore.Data.Models.Genre) with 5 tags
-Added Dungeon Warfare 2 (VaporStore.Data.Models.Genre) with 4 tags
-Added Pro Cycling Manager 2018 (VaporStore.Data.Models.Genre) with 6 tags
-Added Rules Of Survival (VaporStore.Data.Models.Genre) with 2 tags
-Added The Witcher 3: Wild Hunt (VaporStore.Data.Models.Genre) with 5 tags
+Added Dota 2 (Dota 2) with 7 tags
+Added MONSTER HUNTER: WORLD (MONSTER HUNTER: WORLD) with 6 tags
+Added PLAYERUNKNOWN'S BATTLEGROUNDS (PLAYERUNKNOWN'S BATTLEGROUNDS) with 3 tags
+Added Counter-Strike: Global Offensive (Counter-Strike: Global Offensive) with 8 tags
+Added Warframe (Warframe) with 6 tags
+Added Tom Clancy's Rainbow Six Siege (Tom Clancy's Rainbow Six Siege) with 6 tags
+Added Rocket League (Rocket League) with 11 tags
+Added Grand Theft Auto V (Grand Theft Auto V) with 4 tags
+Added Planet Coaster (Planet Coaster) with 5 tags
+Added Warhammer 40,000: Gladius - Relics of War (Warhammer 40,000: Gladius - Relics of War) with 8 tags
+Added Black Desert Online (Black Desert Online) with 6 tags
+Added Jurassic World Evolution (Jurassic World Evolution) with 5 tags
+Added Team Fortress 2 (Team Fortress 2) with 12 tags
+Added NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 (NARUTO SHIPPUDEN: Ultimate Ninja STORM 4) with 6 tags
+Added Path of Exile (Path of Exile) with 8 tags
+Added Banished (Banished) with 2 tags
+Added Raft (Raft) with 5 tags
+Added War Thunder (War Thunder) with 7 tags
+Added Football Manager 2018 (Football Manager 2018) with 6 tags
+Added Dead by Daylight (Dead by Daylight) with 8 tags
+Added The Crew 2 (The Crew 2) with 6 tags
+Added The Forest (The Forest) with 5 tags
+Added House Flipper (House Flipper) with 4 tags
+Added Stardew Valley (Stardew Valley) with 5 tags
+Added Seeking Dawn (Seeking Dawn) with 5 tags
+Added Paladins (Paladins) with 6 tags
+Added Crash Bandicoot N. Sane Trilogy (Crash Bandicoot N. Sane Trilogy) with 5 tags
+Added RimWorld (RimWorld) with 3 tags
+Added Shadowverse CCG (Shadowverse CCG) with 5 tags
+Added Touhou: Scarlet Curiosity (Touhou: Scarlet Curiosity) with 5 tags
+Added Divinity: Original Sin 2 (Divinity: Original Sin 2) with 15 tags
+Added Hunt Showdown (Hunt Showdown) with 2 tags
+Added Darksiders III (Darksiders III) with 5 tags
+Added FINAL FANTASY XIV Online (FINAL FANTASY XIV Online) with 8 tags
+Added Warface (Warface) with 6 tags
+Added SMITE (SMITE) with 3 tags
+Added Subnautica (Subnautica) with 5 tags
+Added Kingdom Come: Deliverance (Kingdom Come: Deliverance) with 5 tags
+Added World of Warships (World of Warships) with 7 tags
+Added Rust (Rust) with 12 tags
+Added Total War: WARHAMMER II (Total War: WARHAMMER II) with 4 tags
+Added FOR HONOR (FOR HONOR) with 6 tags
+Added ARK: Survival Evolved (ARK: Survival Evolved) with 11 tags
+Added Dig or Die (Dig or Die) with 8 tags
+Added NBA 2K18 (NBA 2K18) with 6 tags
+Added Terraria (Terraria) with 9 tags
+Added Wreckfest (Wreckfest) with 7 tags
+Added Shining Resonance Refrain (Shining Resonance Refrain) with 4 tags
+Added Trove (Trove) with 7 tags
+Added Yu-Gi-Oh! Duel Links (Yu-Gi-Oh! Duel Links) with 6 tags
+Added Factorio (Factorio) with 8 tags
+Added Frostpunk (Frostpunk) with 4 tags
+Added Slay the Spire (Slay the Spire) with 5 tags
+Added Beat Saber (Beat Saber) with 2 tags
+Added Bridge Constructor Portal (Bridge Constructor Portal) with 5 tags
+Added The Elder Scrolls V: Skyrim Special Edition (The Elder Scrolls V: Skyrim Special Edition) with 4 tags
+Added Garry's Mod (Garry's Mod) with 11 tags
+Added DARK SOULS: REMASTERED (DARK SOULS: REMASTERED) with 4 tags
+Added Guns, Gore and Cannoli 2 (Guns, Gore and Cannoli 2) with 11 tags
+Added Human: Fall Flat (Human: Fall Flat) with 9 tags
+Added Call of Duty: Black Ops III (Call of Duty: Black Ops III) with 9 tags
+Added Far Cry 5 (Far Cry 5) with 7 tags
+Added Conan Exiles (Conan Exiles) with 9 tags
+Added Brawlhalla (Brawlhalla) with 12 tags
+Added Vampyr (Vampyr) with 5 tags
+Added Squad (Squad) with 5 tags
+Added Neverwinter (Neverwinter) with 6 tags
+Added Tom Clancy's Ghost Recon Wildlands (Tom Clancy's Ghost Recon Wildlands) with 6 tags
+Added Arma 3 (Arma 3) with 14 tags
+Added Soul at Stake (Soul at Stake) with 5 tags
+Added Dungeon Warfare 2 (Dungeon Warfare 2) with 4 tags
+Added Pro Cycling Manager 2018 (Pro Cycling Manager 2018) with 6 tags
+Added Rules Of Survival (Rules Of Survival) with 2 tags
+Added The Witcher 3: Wild Hunt (The Witcher 3: Wild Hunt) with 5 tags
