@@ -1,5 +1,6 @@
 ﻿namespace Boardgames.Data.Models
 {
+    using Boardgames.Constants;
     using System.ComponentModel.DataAnnotations;
 
     public class Seller
@@ -13,11 +14,11 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(GlobalConstants.SellerNameMaxlength)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(30)]
+        [MaxLength(GlobalConstants.SellerAddressMaxLength)]
         public string Address { get; set; }
 
         [Required]  

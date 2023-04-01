@@ -1,5 +1,6 @@
 ﻿namespace Boardgames.Data.Models
 {
+    using Boardgames.Constants;
     using System.ComponentModel.DataAnnotations;
 
     public class Creator
@@ -13,11 +14,11 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(7)]
+        [MaxLength(GlobalConstants.CreatorNameMaxLength)]
         public string FirstName  { get; set; }
 
         [Required]
-        [MaxLength(7)]
+        [MaxLength(GlobalConstants.CreatorNameMaxLength)]
         public string LastName { get; set; }
 
         public virtual ICollection<Boardgame> Boardgames { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace Boardgames.DataProcessor.ImportDto
 {
+    using Boardgames.Constants;
     using System.ComponentModel.DataAnnotations;
     using System.Xml.Serialization;
 
@@ -8,16 +9,16 @@
     {
         [XmlElement("Name")]
         [Required]
-        [MinLength(10)]
-        [MaxLength(20)]
+        [MinLength(GlobalConstants.BoardgameNameMinLength)]
+        [MaxLength(GlobalConstants.BoardgameNameMaxLength)]
         public string Name { get; set; }
 
         [XmlElement("Rating")]
-        [Range(1.00, 10.00)]
+        [Range(GlobalConstants.BoardgameMinRating, GlobalConstants.BoardgameMaxRating)]
         public double Rating { get; set; }
 
         [XmlElement("YearPublished")]
-        [Range(2018, 2023)]
+        [Range(GlobalConstants.BoardgameMinYearPublished, GlobalConstants.BoardgameMaxYearPublished)]
         public int YearPublished { get; set; }
 
         [XmlElement("CategoryType")]

@@ -1,5 +1,6 @@
 ﻿namespace Boardgames.DataProcessor.ImportDto
 {
+    using Boardgames.Constants;
     using Newtonsoft.Json;
     using System.ComponentModel.DataAnnotations;
 
@@ -8,14 +9,14 @@
     {
         [JsonProperty("Name")]
         [Required]
-        [MinLength(5)]
-        [MaxLength(20)]
+        [MinLength(GlobalConstants.SellerNameMinLength)]
+        [MaxLength(GlobalConstants.SellerNameMaxlength)]
         public string Name { get; set; }
 
         [JsonProperty("Address")]
         [Required]
-        [MinLength(2)]
-        [MaxLength(30)]
+        [MinLength(GlobalConstants.SellerAddressMinLength)]
+        [MaxLength(GlobalConstants.SellerNameMaxlength)]
         public string Address { get; set; }
 
         [JsonProperty("Country")]
@@ -24,7 +25,7 @@
 
         [JsonProperty("Website")]
         [Required]
-        [RegularExpression("www.[a-zA-Z0-9-]+.com")]
+        [RegularExpression(GlobalConstants.SellerWebsiteRegex)]
         public string Website { get; set; }
 
         [JsonProperty("Boardgames")]

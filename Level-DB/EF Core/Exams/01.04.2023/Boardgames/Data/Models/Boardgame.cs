@@ -1,5 +1,6 @@
 ﻿namespace Boardgames.Data.Models
 {
+    using Boardgames.Constants;
     using Boardgames.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(GlobalConstants.BoardgameNameMaxLength)]
         public string Name { get; set; }
 
         public double Rating { get; set; }

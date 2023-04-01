@@ -1,5 +1,6 @@
 ﻿namespace Boardgames.DataProcessor.ImportDto
 {
+    using Boardgames.Constants;
     using System.ComponentModel.DataAnnotations;
     using System.Xml.Serialization;
 
@@ -8,14 +9,14 @@
     {
         [XmlElement("FirstName")]
         [Required]
-        [MinLength(2)]
-        [MaxLength(7)]
+        [MinLength(GlobalConstants.CreatorNameMinLength)]
+        [MaxLength(GlobalConstants.CreatorNameMaxLength)]
         public string FirstName { get; set; }
 
         [XmlElement("LastName")]
         [Required]
-        [MinLength(2)]
-        [MaxLength(7)]
+        [MinLength(GlobalConstants.CreatorNameMinLength)]
+        [MaxLength(GlobalConstants.CreatorNameMaxLength)]
         public string LastName { get; set; }
 
         [XmlArray("Boardgames")]
