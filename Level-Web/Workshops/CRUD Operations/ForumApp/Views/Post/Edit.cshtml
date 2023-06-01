@@ -1,0 +1,26 @@
+﻿@model EditPostDto
+
+<div class="row">
+    <form method="post">
+        <div class="form-group">
+            <div class="mb-3">
+                <label asp-for="Title">
+                    <input asp-for="Title" class="form-control" placeholder="Write post title"/>
+                    <span asp-validation-for="@Model.Title" class="small text-danger"></span>
+                </label>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Content">
+                    <input asp-for="Content" class="form-control" placeholder="Write post title"/>
+                    <span asp-validation-for="@Model.Content" class="small text-danger"></span>
+                </label>
+            </div>
+        </div>
+        <input type="submit" value="Edit" class="btn btn-primary mt-3"/>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
