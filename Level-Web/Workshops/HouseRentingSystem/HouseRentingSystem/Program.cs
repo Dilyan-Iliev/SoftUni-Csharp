@@ -1,6 +1,7 @@
 ﻿namespace HouseRentingSystem
 {
     using HouseRentingSystem.Core.Data;
+    using HouseRentingSystem.ModelBinders;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,11 @@
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddMvc(opt =>
+            {
+                opt.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+            });
 
             builder.Services.AddApplicationServices(); //това идва от моя extension method
 

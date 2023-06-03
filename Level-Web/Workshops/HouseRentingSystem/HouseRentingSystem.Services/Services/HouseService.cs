@@ -18,6 +18,41 @@
             this.repo = repo;
         }
 
+        public async Task<int> Add(AddHouseDto model, int agentId)
+        {
+            var house = new House()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Address = model.Address,
+                ImageUrl = model.ImageUrl,
+                PricePerMonth = model.PricePerMonth,
+                CategoryId = model.CategoryId,
+                AgentId = agentId,
+            };
+
+            await this.repo.AddAsync(house);
+            await this.repo.SaveChangesAsync();
+
+            return house.Id;
+        }
+
+        public async Task<bool> CategoryExists(int categoryId)
+            => await this.repo.AllReadonly<Category>()
+                .AnyAsync(c => c.Id == categoryId);
+
+        public async Task<ICollection<HouseCategoryDto>> GetHouseCategories()
+        {
+            return await this.repo.AllReadonly<Category>()
+                .OrderBy(c => c.Name)
+                .Select(c => new HouseCategoryDto()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+                .ToListAsync();
+        }
+
         public async Task<ICollection<HouseDto>> GetLastThreeHouses()
         {
             return await this.repo.AllReadonly<House>()
