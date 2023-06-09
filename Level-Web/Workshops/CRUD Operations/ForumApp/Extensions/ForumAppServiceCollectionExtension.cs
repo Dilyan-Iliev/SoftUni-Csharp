@@ -1,6 +1,7 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
     using AspNetCoreHero.ToastNotification;
+    using ForumApp.Filters;
     using ForumApp.Infrastructure.Data.Common;
     using ForumApp.Services.Contracts;
     using ForumApp.Services.Services;
@@ -11,6 +12,7 @@
         {
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<PageVisitCountFilter>();
             services.AddNotyf(cfg =>
             {
                 cfg.DurationInSeconds = 5;

@@ -13,6 +13,8 @@
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<PageVisit> PageVisits { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PostConfiguration());

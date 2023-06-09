@@ -1,6 +1,7 @@
 namespace ForumApp
 {
     using AspNetCoreHero.ToastNotification.Extensions;
+    using ForumApp.Filters;
     using ForumApp.Infrastructure.Data;
     using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,11 @@ namespace ForumApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(PageVisitCountFilter));
+            });
+            
             builder.Services.AddApplicationServices();
 
             var app = builder.Build();
