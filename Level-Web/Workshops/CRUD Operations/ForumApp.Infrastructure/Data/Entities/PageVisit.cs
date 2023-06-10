@@ -8,6 +8,6 @@
 
         public int VisitsCount { get; set; }
 
-        public string? VisitCookie { get; set; }
+        public string? HashedVisitCookie { get; set; }
     }
 }
