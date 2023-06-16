@@ -21,11 +21,24 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllHousesQueryModel query)
+            //[FromQuery] е, тъй като във формата на самото All View имаме форма с метод GET 
         {
-            return View();
+            var result = await this.houseService.All(
+                query.Category,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllHousesQueryModel.HousesPerPage);
+
+            query.TotalHousesCount = result.TotalHouses;
+            query.Categories = await this.houseService.AllCategoriesNames();
+            query.Houses = result.Houses;
+
+            return View(query);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Mine()
         {
 
