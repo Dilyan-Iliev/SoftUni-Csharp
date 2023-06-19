@@ -27,6 +27,8 @@
 
         public decimal PricePerMonth { get; set; }
 
+        public bool IsActive { get; set; } = true;
+
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 
@@ -38,7 +40,7 @@
         public Agent Agent { get; set; }
 
         [ForeignKey(nameof(Renter))]
-        public string? RenterId { get; set; } 
+        public string? RenterId { get; set; }
 
         public IdentityUser? Renter { get; set; }
     }

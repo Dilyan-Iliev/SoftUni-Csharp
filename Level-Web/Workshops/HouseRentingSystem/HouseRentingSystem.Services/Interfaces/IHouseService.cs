@@ -4,7 +4,6 @@
 
     public interface IHouseService
     {
-        //връща последните 3 къщи
         Task<ICollection<HouseDto>> GetLastThreeHouses();
 
         Task<ICollection<HouseCategoryDto>> GetHouseCategories();
@@ -17,5 +16,29 @@
             HouseSorting sorting = HouseSorting.Newest, int currentPage = 1, int housesPerPage = 1);
 
         Task<IEnumerable<string>> AllCategoriesNames();
+
+        Task<IEnumerable<HouseServiceModel>> AllHousesByAgentId(int id);
+
+        Task<IEnumerable<HouseServiceModel>> AllHousesByUserId(string userId);
+
+        Task<HouseDetailsDto> HouseDetailsById(int id);
+
+        Task<bool> Exists(int id);
+
+        Task Edit(int houseId, AddHouseDto model);
+
+        Task<bool> HasAgentWithId(int houseId, string currentUserId);
+
+        Task<int> GetHouseCategoryId(int houseId);
+
+        Task Delete(int houseId);
+
+        Task<bool> IsRented(int houseId);
+
+        Task<bool> IsRentedByUserWithId(string userId, int houseId);
+
+        Task Rent(int houseId, string userId);
+
+        Task Leave(int houseId);
     }
 }

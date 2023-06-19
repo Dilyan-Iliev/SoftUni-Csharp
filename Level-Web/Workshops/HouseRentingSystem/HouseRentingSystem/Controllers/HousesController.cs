@@ -22,7 +22,7 @@
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> All([FromQuery] AllHousesQueryModel query)
-            //[FromQuery] е, тъй като във формата на самото All View имаме форма с метод GET 
+        //[FromQuery] е, тъй като във формата на самото All View имаме форма с метод GET 
         {
             var result = await this.houseService.All(
                 query.Category,
@@ -35,15 +35,29 @@
             query.Categories = await this.houseService.AllCategoriesNames();
             query.Houses = result.Houses;
 
-            return View(query);
+            return this.View(query);
         }
 
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
+            IEnumerable<HouseServiceModel> myHouses;
 
+            string userId = this.User.Id();
 
-            return View();
+            bool isAgent = await this.agentService.ExistsByIdAsync(userId);
+
+            if (isAgent)
+            {
+                int agentId = await this.agentService.GetAgentId(userId);
+                myHouses = await this.houseService.AllHousesByAgentId(agentId);
+            }
+            else
+            {
+                myHouses = await this.houseService.AllHousesByUserId(userId);
+            }
+
+            return this.View(myHouses);
         }
 
         [HttpGet]
@@ -55,7 +69,7 @@
             if (!userIdExists)
             {
                 //агент може само да добавя имоти и ако не е агент - препращаме към страницата да стане агент
-                return RedirectToAction(nameof(AgentController.Become), "Agent");
+                return this.RedirectToAction(nameof(AgentController.Become), "Agent");
             }
 
             var model = new AddHouseDto()
@@ -63,7 +77,7 @@
                 Categories = await this.houseService.GetHouseCategories(),
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -74,7 +88,7 @@
 
             if (!userIdExists)
             {
-                return RedirectToAction(nameof(AgentController.Become), "Agent");
+                return this.RedirectToAction(nameof(AgentController.Become), "Agent");
             }
 
             bool categoryIdExists =
@@ -88,52 +102,214 @@
             if (!ModelState.IsValid)
             {
                 model.Categories = await this.houseService.GetHouseCategories();
-                return View(model);
+                return this.View(model);
             }
 
             int agentId = await this.agentService.GetAgentId(this.User.Id());
 
             int id = await this.houseService.Add(model, agentId);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return this.RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            return View();
+            bool houseExist = await this.houseService.Exists(id);
+
+            if (!houseExist)
+            {
+                return this.RedirectToAction(nameof(All));
+
+            }
+
+            var house = await this.houseService.HouseDetailsById(id);
+
+            return this.View(house);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new EditHouseDto();
+            bool houseExists = await this.houseService.Exists(id);
 
-            return View(model);
+            if (!houseExists)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool agentWithIdExists = await this.houseService.HasAgentWithId(id, this.User.Id());
+
+            if (!agentWithIdExists)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var house = await this.houseService.HouseDetailsById(id);
+            var categoryId = await this.houseService.GetHouseCategoryId(id);
+
+            var model = new AddHouseDto()
+            {
+                Id = house.Id,
+                Address = house.Address,
+                ImageUrl = house.ImageUrl,
+                Description = house.Description,
+                Title = house.Title,
+                PricePerMonth = house.PricePerMonth,
+                CategoryId = categoryId,
+                Categories = await this.houseService.GetHouseCategories()
+            };
+
+            return this.View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditHouseDto model)
+        public async Task<IActionResult> Edit(int id, AddHouseDto model)
         {
-            return RedirectToAction(nameof(Details), new { id });
+            if (id != model.Id)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                model.Categories = await this.houseService.GetHouseCategories();
+                return this.View(model);
+            }
+
+            bool houseExists = await this.houseService.Exists(model.Id);
+
+            if (!houseExists)
+            {
+                this.ModelState.AddModelError(string.Empty, "House does not exist");
+
+                model.Categories = await this.houseService.GetHouseCategories();
+                return this.View(model);
+            }
+
+            bool agentWithIdExists = await this.houseService.HasAgentWithId(model.Id, this.User.Id());
+
+            if (!agentWithIdExists)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            bool categoryExists = await this.houseService.CategoryExists(model.CategoryId);
+
+            if (!categoryExists)
+            {
+                this.ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist");
+
+                model.Categories = await this.houseService.GetHouseCategories();
+                return this.View(model);
+            }
+
+            await this.houseService.Edit(model.Id, model);
+
+            return this.RedirectToAction(nameof(Details), new { model.Id });
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            return RedirectToAction(nameof(All));
+            bool houseExists = await this.houseService.Exists(id);
+
+            if (!houseExists)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool agentWithIdExists = await this.houseService.HasAgentWithId(id, this.User.Id());
+
+            if (!agentWithIdExists)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var house = await this.houseService.HouseDetailsById(id);
+            var model = new DeleteHouseViewModel()
+            {
+                Address = house.Address,
+                ImageUrl = house.ImageUrl,
+                Title = house.Title
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, DeleteHouseViewModel model)
+        {
+            bool houseExists = await this.houseService.Exists(id);
+
+            if (!houseExists)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool agentWithIdExists = await this.houseService.HasAgentWithId(id, this.User.Id());
+
+            if (!agentWithIdExists)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await this.houseService.Delete(id);
+
+            return this.RedirectToAction(nameof(All));
         }
 
         [HttpPost]
         public async Task<IActionResult> Rent(int id)
         {
-            return RedirectToAction(nameof(Mine));
+            bool houseExists = await this.houseService.Exists(id);
+
+            if (!houseExists)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool agentWithIdExists = await this.agentService.ExistsByIdAsync(this.User.Id());
+
+            if (agentWithIdExists)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var isHouseRented = await this.houseService.IsRented(id);
+
+            if (isHouseRented)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            await this.houseService.Rent(id, this.User.Id());
+
+            return this.RedirectToAction(nameof(Mine));
         }
 
         [HttpPost]
         public async Task<IActionResult> Leave(int id)
         {
-            return RedirectToAction(nameof(Mine));
+            bool houseExists = await this.houseService.Exists(id);
+            var isHouseRented = await this.houseService.IsRented(id);
+
+            if (!houseExists || !isHouseRented)
+            {
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool isHouseRentedByUser = await this.houseService.IsRentedByUserWithId(this.User.Id(), id);
+
+            if (!isHouseRentedByUser)
+            {
+                return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await this.houseService.Leave(id);
+
+            return this.RedirectToAction(nameof(Mine));
         }
     }
 }

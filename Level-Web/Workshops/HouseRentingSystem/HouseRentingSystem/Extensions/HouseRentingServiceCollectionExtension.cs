@@ -1,6 +1,7 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
     using HouseRentingSystem.Core.Data.Repository;
+    using HouseRentingSystem.Services.Exceptions;
     using HouseRentingSystem.Services.Interfaces;
     using HouseRentingSystem.Services.Services;
 
@@ -13,6 +14,7 @@
             sc.AddScoped<IRepository, Repository>();
             sc.AddScoped<IHouseService, HouseService>();
             sc.AddScoped<IAgentService, AgentService>();
+            sc.AddScoped<IGuard, Guard>();
 
             return sc;
         }

@@ -9,6 +9,8 @@
             this.Categories = new List<HouseCategoryDto>();
         }
 
+        public int Id { get; set; }
+
         [Required]
         [StringLength(50, MinimumLength = 10)]
         public string Title { get; set; } = null!;
