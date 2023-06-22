@@ -1,8 +1,9 @@
 ﻿namespace HouseRentingSystem.Services.DTOs.House
 {
+    using HouseRentingSystem.Services.Interfaces;
     using System.ComponentModel.DataAnnotations;
 
-    public class AddHouseDto
+    public class AddHouseDto : IHouseModel
     {
         public AddHouseDto()
         {

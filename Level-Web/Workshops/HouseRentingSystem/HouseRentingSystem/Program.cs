@@ -3,13 +3,14 @@
     using HouseRentingSystem.Core.Data;
     using HouseRentingSystem.ModelBinders;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -33,6 +34,8 @@
             builder.Services.AddMvc(opt =>
             {
                 opt.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+
+                opt.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             builder.Services.AddApplicationServices(); //това идва от моя extension method
@@ -61,6 +64,18 @@
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+                name: "houseDetails",
+                pattern: "House/Details/{id}/{information}"
+                //вече някой за да научка url-то за house details ще трябва да знае освен id,
+                //още и името на къщата
+                );
+
+            app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
             app.MapRazorPages();
 
             app.Run();

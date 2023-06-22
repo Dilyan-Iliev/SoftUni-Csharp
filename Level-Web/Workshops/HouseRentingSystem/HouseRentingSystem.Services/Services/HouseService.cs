@@ -6,6 +6,7 @@
     using HouseRentingSystem.Services.Exceptions;
     using HouseRentingSystem.Services.Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -14,11 +15,13 @@
     {
         private readonly IRepository repo;
         private readonly IGuard guard;
+        private readonly ILogger<HouseService> logger;
 
-        public HouseService(IRepository repo, IGuard guard)
+        public HouseService(IRepository repo, IGuard guard, ILogger<HouseService> logger)
         {
             this.repo = repo;
             this.guard = guard;
+            this.logger = logger;
         }
 
         public async Task<int> Add(AddHouseDto model, int agentId)
@@ -34,8 +37,16 @@
                 AgentId = agentId,
             };
 
-            await this.repo.AddAsync(house);
-            await this.repo.SaveChangesAsync();
+            try
+            {
+                await this.repo.AddAsync(house);
+                await this.repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(nameof(Add), ex);
+                throw new ApplicationException("Database failed to save info", ex);
+            }
 
             return house.Id;
         }
@@ -210,7 +221,8 @@
                 {
                     Id = h.Id,
                     ImageUrl = h.ImageUrl,
-                    Title = h.Title
+                    Title = h.Title,
+                    Address = h.Address
                 })
                 .Take(3)
                 .ToListAsync();

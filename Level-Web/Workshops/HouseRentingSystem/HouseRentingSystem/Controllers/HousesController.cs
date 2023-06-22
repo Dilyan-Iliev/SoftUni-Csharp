@@ -5,18 +5,23 @@
     using HouseRentingSystem.Services.DTOs.House;
     using HouseRentingSystem.Services.Interfaces;
     using HouseRentingSystem.Extensions;
+    using System.Runtime.CompilerServices;
+    using HouseRentingSystem.Services.Extensions;
 
     public class HousesController : BaseController
     {
         private readonly IHouseService houseService;
         private readonly IAgentService agentService;
+        private readonly ILogger<HousesController> logger;
 
         public HousesController(
             IHouseService houseService,
-            IAgentService agentService)
+            IAgentService agentService,
+            ILogger<HousesController> logger)
         {
             this.houseService = houseService;
             this.agentService = agentService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -109,12 +114,12 @@
 
             int id = await this.houseService.Add(model, agentId);
 
-            return this.RedirectToAction(nameof(Details), new { id });
+            return this.RedirectToAction(nameof(Details), new { id, information = model.GetInformation() });
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             bool houseExist = await this.houseService.Exists(id);
 
@@ -125,6 +130,13 @@
             }
 
             var house = await this.houseService.HouseDetailsById(id);
+
+            if (information != house.GetInformation())
+            {
+                TempData["ErrorMessage"] = "Don't touch my slug";
+
+                return this.RedirectToAction("Index", "Home");
+            }
 
             return this.View(house);
         }
@@ -143,6 +155,8 @@
 
             if (!agentWithIdExists)
             {
+                this.logger.LogWarning($"User with id {this.User.Id()} attempted to open other agent house");
+
                 return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
@@ -207,7 +221,7 @@
 
             await this.houseService.Edit(model.Id, model);
 
-            return this.RedirectToAction(nameof(Details), new { model.Id });
+            return this.RedirectToAction(nameof(Details), new { id = model.Id, information = model.GetInformation() });
         }
 
         [HttpGet]

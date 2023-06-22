@@ -14,6 +14,7 @@
             sc.AddScoped<IRepository, Repository>();
             sc.AddScoped<IHouseService, HouseService>();
             sc.AddScoped<IAgentService, AgentService>();
+            sc.AddScoped<IStatisticsService,  StatisticsService>();
             sc.AddScoped<IGuard, Guard>();
 
             return sc;
