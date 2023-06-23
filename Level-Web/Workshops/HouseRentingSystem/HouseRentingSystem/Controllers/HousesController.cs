@@ -1,12 +1,12 @@
 ﻿namespace HouseRentingSystem.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Authorization;
-    using HouseRentingSystem.Services.DTOs.House;
-    using HouseRentingSystem.Services.Interfaces;
     using HouseRentingSystem.Extensions;
-    using System.Runtime.CompilerServices;
+    using HouseRentingSystem.Services.DTOs.House;
     using HouseRentingSystem.Services.Extensions;
+    using HouseRentingSystem.Services.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using static HouseRentingSystem.Areas.Admin.Constants.AdminConstants;
 
     public class HousesController : BaseController
     {
@@ -46,6 +46,11 @@
         [HttpGet]
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRole))
+            {
+                return this.RedirectToAction("Mine", "House", new { area = AreaName });
+            }
+
             IEnumerable<HouseServiceModel> myHouses;
 
             string userId = this.User.Id();
@@ -285,8 +290,9 @@
             }
 
             bool agentWithIdExists = await this.agentService.ExistsByIdAsync(this.User.Id());
+            bool agentIsNotAdmin = !this.User.IsInRole(AdminRole);
 
-            if (agentWithIdExists)
+            if (agentIsNotAdmin && agentWithIdExists)
             {
                 return this.RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }

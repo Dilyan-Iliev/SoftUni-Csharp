@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+    using static HouseRentingSystem.Areas.Admin.Constants.AdminConstants;
 
     public class HomeController : BaseController
     {
@@ -18,11 +19,16 @@
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRole))
+            {
+                return this.RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
+
             var lastThreeHouses = await this.houseService.GetLastThreeHouses();
 
             return View(lastThreeHouses);
         }
-          
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

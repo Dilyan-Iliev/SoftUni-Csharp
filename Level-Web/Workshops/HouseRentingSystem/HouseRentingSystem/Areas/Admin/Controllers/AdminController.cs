@@ -1,14 +1,12 @@
 ﻿namespace HouseRentingSystem.Areas.Admin.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize(Roles = "Administrator")]
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
     }
 }

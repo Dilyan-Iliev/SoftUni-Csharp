@@ -1,6 +1,7 @@
 ﻿namespace HouseRentingSystem
 {
     using HouseRentingSystem.Core.Data;
+    using HouseRentingSystem.Core.Data.Entities;
     using HouseRentingSystem.ModelBinders;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 //от съответния appsettings според средата ще се прочетат различни настройки за вход и регистрация на потребител
                 options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("Identity:RequireConfirmedAccount");
@@ -62,6 +63,10 @@
             app.UseAuthorization();
 
             app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
@@ -72,9 +77,6 @@
                 //още и името на къщата
                 );
 
-            app.MapControllerRoute(
-                name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapRazorPages();
 

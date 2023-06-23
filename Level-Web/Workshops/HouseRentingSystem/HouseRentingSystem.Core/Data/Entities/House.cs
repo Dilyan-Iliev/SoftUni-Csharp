@@ -42,6 +42,6 @@
         [ForeignKey(nameof(Renter))]
         public string? RenterId { get; set; }
 
-        public IdentityUser? Renter { get; set; }
+        public ApplicationUser? Renter { get; set; }
     }
 }
